@@ -1,6 +1,18 @@
 /* for font style */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+:root
+{
+    /* --bg-color: #1f242d; */                  /*also check later*/
+    --bg-color: #222222;
+    /* --second-bg-color: #323946;*/            /*also check later*/         
+    --second-bg-color: #222222;
+    --text-color: #fff;
+    /* --main-color: #0ef; */                   /*also check later*/
+    --main-color: rgba(255, 111, 0, 0.884);
+
+}
+
 /* for puting style on whole html file */
 *   
 {
@@ -12,15 +24,6 @@
     outline: none;
     scroll-behavior: smooth;
     font-family:'Poppins',sans-serif;
-}
-
-:root
-{
-    --bg-color: #1f242d;
-    --second-bg-color: #323946;
-    --text-color: #fff;
-    --main-color: #0ef;
-
 }
 
 html{
