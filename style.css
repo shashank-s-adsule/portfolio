@@ -1,12 +1,12 @@
 :root
 {
     /* --bg-color: #1f242d; */                  /*also check later*/
-    --bg-color: rgba(34, 34, 34,0.75);
+    --bg-color: #222222bf;
     /*--second-bg-color: #323946;            /*also check later */
     --second-bg-color: #222222;
     --text-color: #fff;
     /* --main-color: #0ef; */                   /*also check later*/
-    --main-color: rgba(255, 111, 0, 0.884);
+    --main-color: #ff6f00e1;
 
 }
 
@@ -31,7 +31,6 @@ html{
 
 .header
 {
-    
     display: flex;
     position: fixed;
     top: 0;
@@ -65,18 +64,16 @@ body{
     font-size: 1.7rem;
     margin-left: 4rem;
 
-}
-
-.navbar a
-{
-    font-size: 1.7;
-    color: var(--text-color);
-    margin-left: 4trm;
-}
-
-.navbar a:hover, .navbar a.active 
-{
-    color: var(--main-color);
+    a           /*for head links */
+    {
+        font-size: 1.7;
+        color: var(--text-color);
+        margin-left: 4trm;
+    }
+    a:hover, a.active
+    {
+        color: var(--main-color);
+    }
 }
 
 #menu-icon
