@@ -36,11 +36,23 @@ html{
     top: 0;
     left: 0;
     width: 100%;
-    padding: 2rem 9%;
+    padding: 2rem 3%;
     background-color: var(--bg-color);
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+}
+
+.footer
+{
+    padding: 1rem 4%;
+    width: 100%;
+    background-color: var(--bg-color);
+
+    .contact
+    {
+        font-size: large;
+    }
 }
 
 body{
