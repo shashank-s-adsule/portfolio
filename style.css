@@ -1,3 +1,4 @@
+/* Root  */
 :root
 {
     /* --bg-color: #1f242d; */                  /*also check later*/
@@ -26,33 +27,38 @@
 html{
     
     font-size: 62.5%;
-    overflow-x: hidden;
+    overflow-x: hidden;       /*this will hide scrol bar */      
 }
-
-.header
+header
 {
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 2rem 3%;
+    padding: 2rem 2.5%;
     background-color: var(--bg-color);
     justify-content: space-between;
     align-items: center;
     z-index: 100;
 }
 
-.footer
+footer
 {
+    position: relative;
     padding: 1rem 4%;
     width: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--second-bg-color);
+    display: flex;
 
     .contact
     {
         font-size: large;
     }
+}
+main{
+    height: auto;
+    padding: 20px;
 }
 
 body{
@@ -60,14 +66,6 @@ body{
     background-size: cover;
     background-color:var(--bg-color);
     color: var(--text-color);
-}
-
-.logo
-{
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-    cursor: default;
 }
 
 .navbar
@@ -88,6 +86,16 @@ body{
     }
 }
 
+.logo
+{
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: default;
+}
+
+/* index.html */
+
 #menu-icon
 {
     font-size: 3.2rem;
@@ -95,11 +103,12 @@ body{
     /* display: none;              for temp */
 }
 
+
 .social-media a
 {
     color: var(--text-color);
     font-size: 1.7rem;
-
+    
 }
 
 section
@@ -118,4 +127,67 @@ section
     /* justify-content: right; */
     height: 700px;
     width: 700px;
+}
+
+
+/*--------------------for projects.html--------------------*/
+.project_space{
+    display: flex;
+    padding: 2px;
+}
+.mainhead{
+    text-align: center;
+    font-size: large;
+    margin-top: 75px;
+}
+.card{
+    position: relative;
+    width: 12.5%;
+    height: 200px;
+    margin: 5px;
+    background-color: black;
+    font-style: italic;
+
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    
+    p{
+        font-size: 115%;
+    }
+    img{
+        width: 100%;
+        height: 70%;
+    }
+
+}
+.card_inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card_front, .card_back{
+    position: absolute;
+    backface-visibility: hidden;
+}
+.card_back {
+  color: white;
+  transform: rotateY(180deg);
+
+  a{
+    color: aqua;
+  }
+  .card_links{
+    position: absolute;
+    bottom: -10px;
+    right: 5px;
+  }
+}
+
+.card:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transform: rotateY(180deg);
 }
