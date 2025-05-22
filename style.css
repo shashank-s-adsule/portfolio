@@ -8,7 +8,6 @@
     --text-color: #fff;
     /* --main-color: #0ef; */                   /*also check later*/
     --main-color: #ff6f00e1;
-
 }
 
 /* for puting style on whole html file */
@@ -114,7 +113,8 @@ body{
 section
 {
     min-height: 100vh;
-    padding: 10rem; 
+    margin-top: 7rem;
+    /* padding: 10rem;  */
 }
 
 .home{
@@ -122,13 +122,73 @@ section
     align-items: center;
     justify-content:center;
 }
-
-.home-image{
-    /* justify-content: right; */
-    height: 700px;
-    width: 700px;
+.home-content{
+    padding-left: 5%;
+    height: 500px;
+    width: 50%;
 }
+.home-image{
+    justify-content: center;
+    height: 500px;
+    width: 50%;
+}
+/* ---------------------typer animation-------------------- */
+.typer_animation{
+    font-size: 175%;
 
+    span{
+        position: relative;
+    }
+}
+.typer_animation span::before{
+    content: "Computer Engineer";
+    color: orange;
+    animation: words 20s infinite;
+}
+.typer_animation span::after{
+    content: "";
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 100%;
+    border-left: 2px solid orange;
+    right: -15px;
+    animation: cursor .85s infinite,typing 20s steps(15) infinite ;
+}
+@keyframes cursor {
+    to{
+        border-left: none
+    }
+}
+@keyframes words {
+    0%,20%{
+        content: "Computer Engineer";
+        color:orange;
+    }
+    21%,40%{
+        content: "AI/ML Devloper";
+        color: aqua;
+    }
+    41%,60%{
+        content: "Web Devloper";
+        color: magenta;
+    }
+    61%,80%{
+        content: "Programer";
+        color: yellow;
+    }
+    81%,100%{
+        content: "Gamer";
+        color: green;
+    }
+}
+@keyframes typing {
+    10%,15%,30%,35%,50%,55%,70%,75%,90%,95%{
+        width: 0;
+    }
+    5%,20%,25%,40%,45%,60%,65%,80%,85%{
+        width: calc(100% + 8px);
+    }
+}
 
 /*--------------------for projects.html--------------------*/
 .project_space{
