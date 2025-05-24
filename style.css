@@ -148,10 +148,10 @@ section
 .typer_animation span::after{
     content: "";
     position: absolute;
-    width: calc(100% + 8px);
+    width: calc(100%);
     height: 100%;
-    border-left: 2px solid orange;
-    right: -15px;
+    border-left: 2px solid white;
+    right: -8px;
     animation: cursor .85s infinite,typing 20s steps(15) infinite ;
 }
 @keyframes cursor {
@@ -250,4 +250,29 @@ section
 .card:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transform: rotateY(180deg);
+}
+/* ---------------contact------------------ */
+.contact_box{
+    display: flex;
+    margin-top: 7.5%;
+}
+.email_box{
+    width: 50%;
+}
+.accounts_icon{
+    width: 50%;
+}
+.links_icons{
+    display: flex;
+
+    img{
+        height: 40px;
+        width: 40px;
+        margin: 5px;
+    
+    }
+    
+}
+.links_icons img:hover{
+    transform: scale(1.4);
 }
