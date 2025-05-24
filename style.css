@@ -264,15 +264,18 @@ section
 }
 .links_icons{
     display: flex;
-
+    
     img{
         height: 40px;
         width: 40px;
         margin: 5px;
-    
+
+        filter: grayscale(100%);
+        transition: transform .2s;
     }
     
 }
 .links_icons img:hover{
+    filter: grayscale(0%);
     transform: scale(1.4);
 }
