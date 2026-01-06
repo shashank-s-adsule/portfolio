@@ -8,8 +8,6 @@
     --text-color: #fff;
     /* --main-color: #0ef; */                   /*also check later*/
     --main-color: #ff6f00e1;
-
-    --header-height: 60px;
 }
 
 /* for puting style on whole html file */
@@ -37,7 +35,6 @@ header
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--header-height);
     padding: 2rem 2.5%;
     background-color: var(--bg-color);
     justify-content: space-between;
@@ -60,7 +57,7 @@ footer
 }
 main{
     height: auto;
-    padding: calc(var(--header-height) + 20px) 20px 20px;
+    padding: 20px;
 }
 
 body{
@@ -75,13 +72,17 @@ body{
     color: var(--text-color);
     font-size: 1.7rem;
     margin-left: 4rem;
-}
-.navbar a{          /*for head links*/
-    font-size: 1.7;
-    color: var(--text-color);
-}
-.navbar a:hover,.navbar a.active{
-    color: var(--main-color);
+
+    a           /*for head links */
+    {
+        font-size: 1.7;
+        color: var(--text-color);
+        margin-left: 4trm;
+    }
+    a:hover, a.active
+    {
+        color: var(--main-color);
+    }
 }
 
 .logo
@@ -91,11 +92,22 @@ body{
     font-weight: 600;
     cursor: default;
 }
-/*--------------------for index.html--------------------*/
+
+/* index.html */
+
 #menu-icon
 {
     font-size: 3.2rem;
     color: var(--text-color);
+    /* display: none;              for temp */
+}
+
+
+.social-media a
+{
+    color: var(--text-color);
+    font-size: 1.7rem;
+    
 }
 
 section
@@ -107,41 +119,50 @@ section
 
 .home{
     display: flex;
+    align-items: center;
     justify-content:center;
 
     flex-wrap: wrap;
 }
 .home-content{
     padding-left: 5%;
+    height: 500px;
     width: 50%;
 }
 .home-image{
     justify-content: center;
+    height: 500px;
     width: 50%;
 }
-/* ###### typer animation ###### */
+/* ---------------------typer animation-------------------- */
 .typer_animation{
     font-size: 225%;
-}
-.typer_animation span{
-    position: relative;
+
+    span{
+        position: relative;
+    }
 }
 
 /*--------------------for projects.html--------------------*/
-.project_space{           
+.project_space{
+    display: flex;
+    padding: 2px;
+}
+/* .project_space{          need make this one better 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 1.5rem;
-
-}
+} */
 .mainhead{
     text-align: center;
     font-size: large;
-    /* margin-top: 5%; */
-    margin-bottom: 1.5%;
+    margin-top: 75px;
 }
 .card{
     position: relative;
+    width: 12.5%;
+    height: 200px;
+    margin: 5px;
     background-color: black;
     font-style: italic;
     cursor: pointer;
@@ -150,61 +171,58 @@ section
     transform-style: preserve-3d;
     perspective: 1000px;
     
-    font-size: 115%;
+    p{
+        font-size: 115%;
+    }
+    img{
+        width: 170px;
+        height: 165px;
+        
+        /* for refrence */
+        /* width: 100%;
+        height: 70%; */
+    }
+
 }
-
-.card img{
-    width: 100%;
-    height: 70%;
-    padding-bottom: 5%;
-}
-
-
-/* on mobile device is automatic fliping back    ERROR*/        
 .card_inner{
   position: relative;
   width: 100%;
-  /* height: 100%; */
-  aspect-ratio: 4/5;
+  height: 100%;
+  transition: transform 0.8s;
   transform-style: preserve-3d;
-  transition: transform 0.8s ease;
 }
 
-/* github & webpage link not visiable */
-.card_front,.card_back{
+.card_front, .card_back{
     position: absolute;
-    margin-bottom: 5%;
-    inset: 0;                 /* 🔑 FULL SIZE */
     backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    /* overflow: hidden;         🔑 text stays inside */
-    overflow: visible;   /* remove hidden */
-    border-radius: 12px;
 }
-
 .card_back {
   color: white;
   transform: rotateY(180deg);
-}
-.card_back a{
+
+  a{
     color: aqua;
-}
-.card_back .card_links{
+  }
+  .card_links{
     position: absolute;
-    bottom: 1%;
-    right: 5%;
+    bottom: -10px;
+    right: 5px;
+  }
 }
 
-.card:hover,.card.is-flipped{
+/* .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transform: rotateY(180deg);
+} */
+.card:hover ,.card.is-flipped{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transform: rotateY(180deg);
 }
 
 /* ---------------contact------------------ */
 .contact_box{
-    display: flex;  
+    display: flex;
+    margin-top: 7.5%;
 }
 .email_box{
     width: 50%;
