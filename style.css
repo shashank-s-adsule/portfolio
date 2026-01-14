@@ -64,8 +64,8 @@ main{
 }
 
 body{
-    background-image: url("./images/technologybackground.jpg");
-    background-size: cover;
+    /* background-image: url("./images/technologybackground.jpg"); */
+    /* background-size: cover; */
     background-color:var(--bg-color);
     color: var(--text-color);
 }
