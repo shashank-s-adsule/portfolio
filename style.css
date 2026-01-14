@@ -195,11 +195,15 @@ section
     bottom: 1%;
     right: 5%;
 }
+.card_links a:hover{
+    color: yellow;
+}
 
 .card:hover,.card.is-flipped{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transform: rotateY(180deg);
 }
+
 
 /* ---------------contact------------------ */
 .contact_box{
