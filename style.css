@@ -64,7 +64,7 @@ main{
 }
 
 body{
-    background-image: url("./images/technologybackground.jpg");
+    background-image: url("./images/technologybackground.webp");
     background-size: cover;
     background-color:var(--bg-color);
     color: var(--text-color);
