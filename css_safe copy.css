@@ -64,7 +64,7 @@ main{
 }
 
 body{
-    background-image: url("./images/technologybackground.jpg");
+    background-image: url("./images/technologybackground.webp");
     background-size: cover;
     background-color:var(--bg-color);
     color: var(--text-color);
@@ -159,7 +159,6 @@ section
     padding-bottom: 5%;
 }
 
-
 /* on mobile device is automatic fliping back    ERROR*/        
 .card_inner{
   position: relative;
@@ -196,11 +195,15 @@ section
     bottom: 1%;
     right: 5%;
 }
+.card_links a:hover{
+    color: yellow;
+}
 
 .card:hover,.card.is-flipped{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transform: rotateY(180deg);
 }
+
 
 /* ---------------contact------------------ */
 .contact_box{

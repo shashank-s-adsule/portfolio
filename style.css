@@ -119,6 +119,13 @@ section
     justify-content: center;
     width: 50%;
 }
+.home-image img{
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 /* ###### typer animation ###### */
 .typer_animation{
     font-size: 225%;
