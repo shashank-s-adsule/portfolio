@@ -91,6 +91,8 @@ body{
     font-weight: 600;
     cursor: default;
 }
+
+
 /*--------------------for index.html--------------------*/
 #menu-icon
 {
@@ -101,7 +103,7 @@ body{
 section
 {
     min-height: 100vh;
-    margin-top: 7rem;
+    margin-top: 5%;
     /* padding: 10rem;  */
 }
 
@@ -133,6 +135,10 @@ section
 .typer_animation span{
     position: relative;
 }
+
+/*--------------------for Aboutme.html--------------------*/
+
+
 
 /*--------------------for projects.html--------------------*/
 .project_space{           
