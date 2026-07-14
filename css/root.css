@@ -7,17 +7,34 @@
     --main-color: #ff6f00e1;
 
 
-
-    --header-height: 60px;
+    /* --header-height: 60px; */
+    --header-height: 5%;
 }
 
 body{
-    /* Gradient background */
-    background:
+    background-color: var(--bg-color);
+    background-image:
         radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.31), transparent 40%),
         radial-gradient(circle at 80% 15%, rgba(255, 0, 0, 0.407), transparent 40%),
         radial-gradient(circle at 50% 80%, rgba(0, 255, 4, 0.34), transparent 45%),
         linear-gradient(180deg,#050505,#000);
-
     background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    color: var(--text-color);               /*text color*/
+}
+
+header
+{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    padding: 2rem 2.5%;
+    background-color: var(--bg-color);
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
 }
