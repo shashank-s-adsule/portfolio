@@ -1,16 +1,50 @@
 /* Root  */
 :root
 {
-    /* --bg-color: #1f242d; */                  /*also check later*/
+    /* Colors */
     --bg-color: #222222bf;
-    /*--second-bg-color: #323946;            /*also check later */
     --second-bg-color: #222222;
     --text-color: #fff;
-    /* --main-color: #0ef; */                   /*also check later*/
     --main-color: #ff6f00e1;
+    /* --bg-color: #1f242d; */                  /*also check later*/
+    /*--second-bg-color: #323946;            /*also check later */
+    /* --main-color: #0ef; */                   /*also check later*/
+
+    /* Gradient */
+    --bg-gradient: linear-gradient(135deg,#222222,#2d2d2d,#3b3b3b);
+    --main-gradient: linear-gradient(135deg,#222222,#2d2d2d,#3b3b3b);
+    --hero-gradient: linear-gradient(135deg,#222222,#2d2d2d,#3b3b3b);
 
     --header-height: 60px;
 }
+
+@view-transition{
+    navigation: auto
+}
+
+::view-transition-group(root){
+    animation-duration: 1000ms;
+    animation-timing-function: ease;
+}
+
+::view-transition-old(root){
+    animation-name: slide-out;
+}
+::view-transition-in(root){
+    animation-name: slide-in;
+}
+
+@keyframes slide-out{
+    to{
+        translate: -100vw;
+    }
+}
+@keyframes slide-in{
+    from{
+        translate: 100vw;
+    }
+}
+
 
 /* for puting style on whole html file */
 *   
