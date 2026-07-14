@@ -6,7 +6,6 @@
     margin-left: 4rem;
 }
 .navbar a{          /*for head links*/
-    font-size: 1.7;
     color: var(--text-color);
 }
 .navbar a:hover,.navbar a.active{

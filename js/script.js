@@ -23,10 +23,10 @@ const typerwriter_target = document.getElementById("typewriter");
 
 function type() {
   const currentWord = words[wordIndex];
-  
+
   // Set color for current word
   typerwriter_target.style.color = currentWord.color;
-  
+
   if (charIndex < currentWord.text.length) {
     typerwriter_target.textContent += currentWord.text.charAt(charIndex);
     charIndex++;
