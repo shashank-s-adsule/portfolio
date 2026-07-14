@@ -1,17 +1,4 @@
-/* Root  */
-:root
-{
-    /* Colors */
-    --bg-color: #222222bf;
-    --second-bg-color: #222222;
-    --text-color: #fff;
-    --main-color: #ff6f00e1;
-    /* --bg-color: #1f242d; */                  /*also check later*/
-    /*--second-bg-color: #323946;            /*also check later */
-    /* --main-color: #0ef; */                   /*also check later*/
 
-    --header-height: 60px;
-}
 
 @view-transition{
     navigation: auto
@@ -39,88 +26,6 @@
         translate: 100vw;
     }
 }
-
-
-/* for puting style on whole html file */
-*   
-{
-    margin: 0;
-    padding: 0; 
-    box-sizing: border-box;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    scroll-behavior: smooth;
-    font-family:'Poppins',sans-serif;
-}
-
-html{
-    
-    font-size: 62.5%;
-    overflow-x: hidden;       /*this will hide scrol bar */      
-}
-header
-{
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--header-height);
-    padding: 2rem 2.5%;
-    background-color: var(--bg-color);
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
-
-footer
-{
-    position: relative;
-    padding: 1rem 4%;
-    width: 100%;
-    background-color: var(--second-bg-color);
-    display: flex;
-
-    .contact
-    {
-        font-size: large;
-    }
-}
-main{
-    height: auto;
-    padding: calc(var(--header-height) + 20px) 20px 20px;
-}
-
-body{
-    background-image: url("./images/technologybackground.webp");
-    background-size: cover;
-    background-color:var(--bg-color);
-    color: var(--text-color);
-}
-
-.navbar
-{
-    color: var(--text-color);
-    font-size: 1.7rem;
-    margin-left: 4rem;
-}
-.navbar a{          /*for head links*/
-    font-size: 1.7;
-    color: var(--text-color);
-}
-.navbar a:hover,.navbar a.active{
-    color: var(--main-color);
-}
-
-.logo
-{
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-    cursor: default;
-}
-
 
 /*--------------------for index.html--------------------*/
 #menu-icon
@@ -170,7 +75,7 @@ section
 
 
 /*--------------------for projects.html--------------------*/
-.project_space{           
+.project_space{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 1.5rem;
@@ -191,7 +96,7 @@ section
     transition: transform 0.8s;
     transform-style: preserve-3d;
     perspective: 1000px;
-    
+
     font-size: 115%;
 }
 
@@ -201,7 +106,7 @@ section
     padding-bottom: 5%;
 }
 
-/* on mobile device is automatic fliping back    ERROR*/        
+/* on mobile device is automatic fliping back    ERROR*/
 .card_inner{
   position: relative;
   width: 100%;
@@ -249,7 +154,7 @@ section
 
 /* ---------------contact------------------ */
 .contact_box{
-    display: flex;  
+    display: flex;
 }
 .email_box{
     width: 50%;
@@ -259,7 +164,7 @@ section
 }
 .links_icons{
     display: flex;
-    
+
     img{
         height: 40px;
         width: 40px;

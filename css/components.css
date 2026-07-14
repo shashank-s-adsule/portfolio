@@ -1,0 +1,23 @@
+/* --------------------- NAVBAR --------------------- */
+.navbar
+{
+    color: var(--text-color);
+    font-size: 1.7rem;
+    margin-left: 4rem;
+}
+.navbar a{          /*for head links*/
+    font-size: 1.7;
+    color: var(--text-color);
+}
+.navbar a:hover,.navbar a.active{
+    color: var(--main-color);
+}
+
+/* --------------------- LOGO --------------------- */
+.logo
+{
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: default;
+}
