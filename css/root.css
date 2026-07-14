@@ -5,20 +5,14 @@
     --second-bg-color: #222222;
     --text-color: #fff;
     --main-color: #ff6f00e1;
-    /* --bg-color: #1f242d; */                  /*also check later*/
-    /*--second-bg-color: #323946;            /*also check later */
-    /* --main-color: #0ef; */                   /*also check later*/
 
-    /* Gradient */
-    --bg-gradient: linear-gradient(135deg,#222222,#2d2d2d,#3b3b3b);
-    --main-gradient: linear-gradient(135deg,#222222,#2d2d2d,#3b3b3b);
-    --hero-gradient: linear-gradient(135deg,#222222,#2d2d2d,#3b3b3b);
+
 
     --header-height: 60px;
 }
 
-
 body{
+    /* Gradient background */
     background:
         radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.31), transparent 40%),
         radial-gradient(circle at 80% 15%, rgba(255, 0, 0, 0.407), transparent 40%),
