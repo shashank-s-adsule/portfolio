@@ -1,176 +1,227 @@
-
-
-@view-transition{
-    navigation: auto
-}
-
-::view-transition-group(root){
-    animation-duration: 1000ms;
-    animation-timing-function: ease;
-}
-
-::view-transition-old(root){
-    animation-name: slide-out;
-}
-::view-transition-in(root){
-    animation-name: slide-in;
-}
-
-@keyframes slide-out{
-    to{
-        translate: -100vw;
-    }
-}
-@keyframes slide-in{
-    from{
-        translate: 100vw;
-    }
-}
-
 /*--------------------for index.html--------------------*/
-#menu-icon
-{
+#menu-icon {
     font-size: 3.2rem;
     color: var(--text-color);
 }
 
-section
-{
+section {
     min-height: 100vh;
     margin-top: 5%;
-    /* padding: 10rem;  */
 }
 
-.home{
+.home {
     display: flex;
-    justify-content:center;
-
+    justify-content: center;
     flex-wrap: wrap;
 }
-.home-content{
+.home-content {
     padding-left: 5%;
     width: 50%;
 }
-.home-image{
+.home-image {
     justify-content: center;
     width: 50%;
 }
-.home-image img{
+.home-image img {
     width: 50%;
     height: auto;
     border-radius: 50%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* ###### typer animation ###### */
-.typer_animation{
-    font-size: 225%;
-}
-.typer_animation span{
-    position: relative;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 /*--------------------for projects.html--------------------*/
-.project_space{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 1.5rem;
-
-}
-.mainhead{
+.mainhead {
     text-align: center;
     font-size: large;
-    /* margin-top: 5%; */
     margin-bottom: 1.5%;
 }
-.card{
-    position: relative;
-    background-color: black;
-    font-style: italic;
-    cursor: pointer;
 
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-
-    font-size: 115%;
-}
-
-.card img{
-    width: 100%;
-    height: 70%;
-    padding-bottom: 5%;
-}
-
-/* on mobile device is automatic fliping back    ERROR*/
-.card_inner{
-  position: relative;
-  width: 100%;
-  /* height: 100%; */
-  aspect-ratio: 4/5;
-  transform-style: preserve-3d;
-  transition: transform 0.8s ease;
-}
-
-/* github & webpage link not visiable */
-.card_front,.card_back{
-    position: absolute;
-    margin-bottom: 5%;
-    inset: 0;                 /* 🔑 FULL SIZE */
-    backface-visibility: hidden;
+.project_space {
     display: flex;
     flex-direction: column;
-    background-color: black;
-    /* overflow: hidden;         🔑 text stays inside */
-    overflow: visible;   /* remove hidden */
-    border-radius: 12px;
+    gap: 10px;
+    padding: 0 4%;
 }
 
-.card_back {
-  color: white;
-  transform: rotateY(180deg);
+/* ── Accordion item ── */
+.acc-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.04);
+    transition: border-color 0.2s;
 }
-.card_back a{
+.acc-item:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.acc-item.open {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Header row ── */
+.acc-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ── Thumbnail ── */
+.acc-thumb {
+    width: 88px;
+    height: 62px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #1a1a1a;
+}
+
+/* ── Title + meta block ── */
+.acc-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+.acc-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.acc-category {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+.acc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 2px;
+}
+.acc-tags span {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Chevron ── */
+.acc-chevron {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    line-height: 1;
+}
+.acc-item.open .acc-chevron {
+    transform: rotate(180deg);
+}
+
+/* ── Collapsible body ── */
+.acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.38s ease;
+}
+.acc-item.open .acc-body {
+    max-height: 260px;
+}
+.acc-body-inner {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px;
+}
+
+/* ── Description ── */
+.acc-desc {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.65;
+    margin: 0 0 14px;
+}
+
+/* ── Section label ── */
+.acc-section-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+/* ── Tech pills ── */
+.acc-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+.acc-pills span {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background-color: rgba(0, 200, 255, 0.08);
+    color: aqua;
+    border: 1px solid rgba(0, 200, 255, 0.25);
+}
+
+/* ── Footer with buttons ── */
+.acc-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.acc-btn {
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.acc-btn:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.acc-btn-primary {
+    border-color: rgba(0, 200, 255, 0.4);
     color: aqua;
 }
-.card_back .card_links{
-    position: absolute;
-    bottom: 1%;
-    right: 5%;
-}
-.card_links a:hover{
+.acc-btn-primary:hover {
+    background-color: rgba(0, 200, 255, 0.1);
     color: yellow;
+    border-color: yellow;
 }
 
-.card:hover,.card.is-flipped{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    transform: rotateY(180deg);
-}
-
-
-/* ---------------contact------------------ */
-.contact_box{
-    display: flex;
-}
-.email_box{
-    width: 50%;
-}
-.accounts_icon{
-    width: 50%;
-}
-.links_icons{
-    display: flex;
-
-    img{
-        height: 40px;
-        width: 40px;
-        margin: 5px;
-
-        filter: grayscale(100%);
-        transition: transform .2s;
+/* ── Responsive ── */
+@media (max-width: 520px) {
+    .acc-header {
+        flex-wrap: wrap;
     }
-}
-.links_icons img:hover{
-    filter: grayscale(0%);
-    transform: scale(1.4);
+    .acc-title {
+        white-space: normal;
+    }
+    .acc-thumb {
+        width: 64px;
+        height: 46px;
+    }
 }

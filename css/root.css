@@ -7,7 +7,6 @@
     --text-color: #fff;
     --main-color: #ff6f00e1;
 
-
     --header-height: 60px;
 }
 
@@ -20,13 +19,12 @@
     text-decoration: none;
     border: none;
     outline: none;
-    scroll-behavior: smooth;
     font-family:'Poppins',sans-serif;
 }
 
 html{
-
     font-size: 62.5%;
+    scroll-behavior: smooth;
     overflow-x: hidden;       /*this will hide scrol bar */
 }
 

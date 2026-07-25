@@ -1,0 +1,26 @@
+@view-transition{
+    navigation: auto
+}
+
+::view-transition-group(root){
+    animation-duration: 1000ms;
+    animation-timing-function: ease;
+}
+
+::view-transition-old(root){
+    animation-name: slide-out;
+}
+::view-transition-in(root){
+    animation-name: slide-in;
+}
+
+@keyframes slide-out{
+    to{
+        translate: -100vw;
+    }
+}
+@keyframes slide-in{
+    from{
+        translate: 100vw;
+    }
+}
