@@ -31,7 +31,7 @@ section {
 
 /*--------------------for highlights.html--------------------*/
 .mainhead {
-    text-align: center;
+    /* text-align: center; */
     font-size: large;
     margin-bottom: 1.5%;
 }

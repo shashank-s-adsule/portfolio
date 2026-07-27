@@ -26,128 +26,290 @@
         </nav>
     </header>
 
+    <style>
+        /* ── Tab navigation ── */
+        .hl-tabs {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0 4%;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .hl-tab {
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem 0.75rem;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+            margin-bottom: -1px;
+        }
+        .hl-tab:hover { color: rgba(255,255,255,0.75); }
+        .hl-tab.active {
+            color: #fff;
+            border-bottom-color: aqua;
+        }
+
+        /* ── Tab panels ── */
+        .hl-panel { display: none; }
+        .hl-panel.active { display: block; }
+
+        /* ── Award cards ── */
+        .award-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            padding: 0 4%;
+        }
+        .award-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 12px;
+            padding: 1.25rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: border-color 0.2s;
+        }
+        .award-card:hover { border-color: rgba(255,255,255,0.2); }
+        .award-icon { font-size: 1.6rem; }
+        .award-title {
+            font-size: 0.97rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .award-sub {
+            font-size: 0.83rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* ── Achievement timeline ── */
+        .ach-list {
+            padding: 0 4%;
+            border-left: 2px solid rgba(255,255,255,0.1);
+            margin-left: calc(4% + 0.5rem);
+        }
+        .ach-item {
+            position: relative;
+            padding: 0 0 1.5rem 1.5rem;
+        }
+        .ach-item::before {
+            content: '';
+            position: absolute;
+            left: -0.65rem;
+            top: 0.4rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: aqua;
+            opacity: 0.7;
+        }
+        .ach-item:last-child { padding-bottom: 0; }
+        .ach-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+        .ach-detail {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .hl-section-heading {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.3);
+            padding: 0 4%;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        main { min-height: unset; margin-top: 0; }
+    </style>
+
     <main>
-        <div class="mainhead">
-            <h1>Projects</h1>
+        <div class="mainhead" style="padding: 0 4%; margin-bottom: 1.25rem;">
+            <h1>Highlights</h1>
         </div>
 
-        <div class="project_space">
-
-            <!-- NST -->
-            <div class="acc-item">
-                <div class="acc-header">
-                    <img class="acc-thumb" src="./images/thumbnails/NST.webp" alt="Neural Style Transfer">
-                    <div class="acc-meta">
-                        <span class="acc-title">Neural Style Transfer</span>
-                        <span class="acc-category">Computer Vision &middot; Deep Learning</span>
-                        <div class="acc-tags">
-                            <span>PyTorch</span><span>OpenCV</span><span>VGG16</span>
-                        </div>
-                    </div>
-                    <span class="acc-chevron">&#8964;</span>
-                </div>
-                <div class="acc-body">
-                    <div class="acc-body-inner">
-                        <p class="acc-desc">Blends the content of one image with the artistic style of another using a pretrained VGG network to compute content and style loss across feature maps.</p>
-                        <div class="acc-section-label">Technologies</div>
-                        <div class="acc-pills">
-                            <span>Python</span><span>PyTorch</span><span>OpenCV</span><span>VGG16</span>
-                        </div>
-                        <div class="acc-footer">
-                            <a class="acc-btn" href="https://github.com/shashank-s-adsule/neural-style-transfer" target="_blank">Github</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Morse code -->
-            <div class="acc-item">
-                <div class="acc-header">
-                    <img class="acc-thumb" src="./images/thumbnails/CLI morse code.webp" alt="Morse code">
-                    <div class="acc-meta">
-                        <span class="acc-title">CLI Morse Code Generator with Audio</span>
-                        <span class="acc-category">Systems &middot; CLI Tool</span>
-                        <div class="acc-tags">
-                            <span>C++</span><span>Audio</span><span>File I/O</span>
-                        </div>
-                    </div>
-                    <span class="acc-chevron">&#8964;</span>
-                </div>
-                <div class="acc-body">
-                    <div class="acc-body-inner">
-                        <p class="acc-desc">Executable CLI app that encodes and decodes Morse code from plain text, and synthesizes .wav audio output for each Morse sequence.</p>
-                        <div class="acc-section-label">Technologies</div>
-                        <div class="acc-pills">
-                            <span>C++</span><span>Morse code</span><span>File handling</span><span>.wav format</span>
-                        </div>
-                        <div class="acc-footer">
-                            <a class="acc-btn" href="https://github.com/shashank-s-adsule/CLI-Morse-code-generator-with-audio-generation" target="_blank">Github</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ANPR -->
-            <div class="acc-item">
-                <div class="acc-header">
-                    <img class="acc-thumb" src="./images/thumbnails/ANPR.webp" alt="ANPR">
-                    <div class="acc-meta">
-                        <span class="acc-title">Automatic Number Plate Recognition</span>
-                        <span class="acc-category">Computer Vision &middot; Object Detection</span>
-                        <div class="acc-tags">
-                            <span>YOLO v8</span><span>EasyOCR</span><span>OpenCV</span>
-                        </div>
-                    </div>
-                    <span class="acc-chevron">&#8964;</span>
-                </div>
-                <div class="acc-body">
-                    <div class="acc-body-inner">
-                        <p class="acc-desc">ANPR pipeline using YOLOv8 for real-time license plate detection and EasyOCR for character extraction from cropped plate regions.</p>
-                        <div class="acc-section-label">Technologies</div>
-                        <div class="acc-pills">
-                            <span>Python</span><span>YOLO v8</span><span>OpenCV</span><span>EasyOCR</span>
-                        </div>
-                        <div class="acc-footer">
-                            <a class="acc-btn" href="https://github.com/shashank-s-adsule/Automatic_number_plate_recognition_using_YOLO_v8_and_easyOCR" target="_blank">Github</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Image to sketch -->
-            <div class="acc-item">
-                <div class="acc-header">
-                    <img class="acc-thumb" src="./images/thumbnails/image to sketch.webp" alt="Image to sketch">
-                    <div class="acc-meta">
-                        <span class="acc-title">Image to Sketch</span>
-                        <span class="acc-category">Machine Learning &middot; Image Processing</span>
-                        <div class="acc-tags">
-                            <span>K-Means</span><span>Python</span><span>OpenCV</span>
-                        </div>
-                    </div>
-                    <span class="acc-chevron">&#8964;</span>
-                </div>
-                <div class="acc-body">
-                    <div class="acc-body-inner">
-                        <p class="acc-desc">Converts photos to pencil-sketch-style images by applying K-Means clustering to segment color regions, then simplifying them into sketch-like outputs.</p>
-                        <div class="acc-section-label">Technologies</div>
-                        <div class="acc-pills">
-                            <span>Python</span><span>K-Means</span><span>OpenCV</span>
-                        </div>
-                        <div class="acc-footer">
-                            <a class="acc-btn" href="https://github.com/shashank-s-adsule/image-to-sketch" target="_blank">Github</a>
-                            <a class="acc-btn acc-btn-primary" href="https://image-to-sketch-2599.streamlit.app/" target="_blank">&#8599; Live demo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- Tab bar -->
+        <div class="hl-tabs">
+            <button class="hl-tab active" data-tab="projects">🚀 Projects</button>
+            <button class="hl-tab" data-tab="awards">🎖️ Awards</button>
+            <button class="hl-tab" data-tab="achievements">🏅 Achievements</button>
         </div>
+
+        <!-- ── Projects panel ── -->
+        <div class="hl-panel active" id="tab-projects">
+            <div class="project_space">
+
+                <!-- NST -->
+                <div class="acc-item">
+                    <div class="acc-header">
+                        <img class="acc-thumb" src="./images/thumbnails/NST.webp" alt="Neural Style Transfer">
+                        <div class="acc-meta">
+                            <span class="acc-title">Neural Style Transfer</span>
+                            <span class="acc-category">Computer Vision &middot; Deep Learning</span>
+                            <div class="acc-tags"><span>PyTorch</span><span>OpenCV</span><span>VGG19</span></div>
+                        </div>
+                        <span class="acc-chevron">&#8964;</span>
+                    </div>
+                    <div class="acc-body">
+                        <div class="acc-body-inner">
+                            <p class="acc-desc">Blends the content of one image with the artistic style of another using a pretrained VGG19 network to compute content and style loss across feature maps.</p>
+                            <div class="acc-section-label">Technologies</div>
+                            <div class="acc-pills"><span>Python</span><span>PyTorch</span><span>OpenCV</span><span>VGG19</span><span>L-BFGS optimizer</span></div>
+                            <div class="acc-footer">
+                                <a class="acc-btn" href="https://github.com/shashank-s-adsule/neural-style-transfer" target="_blank">Github</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Morse code -->
+                <div class="acc-item">
+                    <div class="acc-header">
+                        <img class="acc-thumb" src="./images/thumbnails/CLI morse code.webp" alt="Morse code">
+                        <div class="acc-meta">
+                            <span class="acc-title">CLI Morse Code Generator with Audio</span>
+                            <span class="acc-category">Systems &middot; CLI Tool</span>
+                            <div class="acc-tags"><span>C++</span><span>Audio</span><span>Cross-platform</span></div>
+                        </div>
+                        <span class="acc-chevron">&#8964;</span>
+                    </div>
+                    <div class="acc-body">
+                        <div class="acc-body-inner">
+                            <p class="acc-desc">Executable CLI app (Windows &amp; Linux) that encodes and decodes Morse code from plain text, and synthesizes .wav audio output for each Morse sequence.</p>
+                            <div class="acc-section-label">Technologies</div>
+                            <div class="acc-pills"><span>C++</span><span>Morse code</span><span>File handling</span><span>.wav format</span></div>
+                            <div class="acc-footer">
+                                <a class="acc-btn" href="https://github.com/shashank-s-adsule/CLI-Morse-code-generator-with-audio-generation" target="_blank">Github</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANPR -->
+                <div class="acc-item">
+                    <div class="acc-header">
+                        <img class="acc-thumb" src="./images/thumbnails/ANPR.webp" alt="ANPR">
+                        <div class="acc-meta">
+                            <span class="acc-title">Automatic Number Plate Recognition</span>
+                            <span class="acc-category">Computer Vision &middot; Object Detection</span>
+                            <div class="acc-tags"><span>YOLO v8</span><span>EasyOCR</span><span>OpenCV</span></div>
+                        </div>
+                        <span class="acc-chevron">&#8964;</span>
+                    </div>
+                    <div class="acc-body">
+                        <div class="acc-body-inner">
+                            <p class="acc-desc">ANPR pipeline using YOLOv8 for real-time license plate detection and EasyOCR for character extraction from cropped plate regions. Results exported to .csv.</p>
+                            <div class="acc-section-label">Technologies</div>
+                            <div class="acc-pills"><span>Python</span><span>YOLO v8</span><span>OpenCV</span><span>EasyOCR</span><span>SORT</span><span>Roboflow</span></div>
+                            <div class="acc-footer">
+                                <a class="acc-btn" href="https://github.com/shashank-s-adsule/Automatic_number_plate_recognition_using_YOLO_v8_and_easyOCR" target="_blank">Github</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image to sketch -->
+                <div class="acc-item">
+                    <div class="acc-header">
+                        <img class="acc-thumb" src="./images/thumbnails/image to sketch.webp" alt="Image to sketch">
+                        <div class="acc-meta">
+                            <span class="acc-title">Image to Sketch</span>
+                            <span class="acc-category">Machine Learning &middot; Image Processing</span>
+                            <div class="acc-tags"><span>K-Means</span><span>Python</span><span>Streamlit</span></div>
+                        </div>
+                        <span class="acc-chevron">&#8964;</span>
+                    </div>
+                    <div class="acc-body">
+                        <div class="acc-body-inner">
+                            <p class="acc-desc">Converts photos to pencil-sketch-style images using K-Means clustering for colour quantization, retaining key structural features via image processing techniques.</p>
+                            <div class="acc-section-label">Technologies</div>
+                            <div class="acc-pills"><span>Python</span><span>K-Means</span><span>OpenCV</span><span>Streamlit</span></div>
+                            <div class="acc-footer">
+                                <a class="acc-btn" href="https://github.com/shashank-s-adsule/image-to-sketch" target="_blank">Github</a>
+                                <a class="acc-btn acc-btn-primary" href="https://image-to-sketch-2599.streamlit.app/" target="_blank">&#8599; Live demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── Awards panel ── -->
+        <div class="hl-panel" id="tab-awards">
+            <p class="hl-section-heading">Certifications</p>
+            <div class="award-grid">
+                <div class="award-card">
+                    <span class="award-icon">📜</span>
+                    <span class="award-title">C Intermediate</span>
+                    <span class="award-sub">Sololearn</span>
+                </div>
+                <div class="award-card">
+                    <span class="award-icon">📜</span>
+                    <span class="award-title">C++ Intermediate</span>
+                    <span class="award-sub">Sololearn</span>
+                </div>
+                <div class="award-card">
+                    <span class="award-icon">📜</span>
+                    <span class="award-title">Java</span>
+                    <span class="award-sub">HackerRank</span>
+                </div>
+                <div class="award-card">
+                    <span class="award-icon">📜</span>
+                    <span class="award-title">Scientific Computing with Python</span>
+                    <span class="award-sub">freeCodeCamp</span>
+                </div>
+                <div class="award-card">
+                    <span class="award-icon">📜</span>
+                    <span class="award-title">SQL</span>
+                    <span class="award-sub">HackerRank</span>
+                </div>
+                <div class="award-card">
+                    <span class="award-icon">🧩</span>
+                    <span class="award-title">Problem Solving</span>
+                    <span class="award-sub">HackerRank</span>
+                </div>
+                <div class="award-card">
+                    <span class="award-icon">👁️</span>
+                    <span class="award-title">OpenCV Bootcamp</span>
+                    <span class="award-sub">OpenCV University</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Achievements panel ── -->
+        <div class="hl-panel" id="tab-achievements">
+            <p class="hl-section-heading">Olympiad &amp; Academic Honours</p>
+            <div class="ach-list">
+                <div class="ach-item">
+                    <div class="ach-title">🥇 National Science Olympiad — 1st rank in class</div>
+                    <div class="ach-detail">Qualified in Dec 2016 &amp; Dec 2018 · 1st rank in class in 2018</div>
+                </div>
+                <div class="ach-item">
+                    <div class="ach-title">📐 International Mathematics Olympiad</div>
+                    <div class="ach-detail">Qualified — Jan 2017</div>
+                </div>
+                <div class="ach-item">
+                    <div class="ach-title">🔬 International Science Olympiad — 3rd rank in class</div>
+                    <div class="ach-detail">Qualified in 2015 · 3rd rank in class</div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script src="./js/script.js"></script>
 
     <script>
+        // Accordion
         document.querySelectorAll('.acc-header').forEach(function(header) {
             header.addEventListener('click', function() {
                 var item = header.closest('.acc-item');
@@ -156,6 +318,16 @@
                     el.classList.remove('open');
                 });
                 if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        // Tabs
+        document.querySelectorAll('.hl-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.hl-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.hl-panel').forEach(function(p) { p.classList.remove('active'); });
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
             });
         });
     </script>
