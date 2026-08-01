@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href=".\css\root.css">
@@ -13,52 +12,385 @@
     <link rel="stylesheet" type="text/css" href=".\css\style.css">
 
     <title>Shashank Satish Adsule</title>
+
+    <style>
+        /* ── Reset global section min-height ── */
+        main section,
+        main .contact-page {
+            min-height: unset;
+            margin-top: 0;
+        }
+
+        /* ── Page container ── */
+        .contact-page {
+            padding: 2.5rem 4% 4rem;
+        }
+
+        /* ── Hero ── */
+        .contact-hero {
+            margin-bottom: 2.5rem;
+        }
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: rgba(0, 200, 120, 0.1);
+            border: 1px solid rgba(0, 200, 120, 0.25);
+            border-radius: 20px;
+            padding: 0.28rem 0.8rem;
+            font-size: 0.85rem;
+            color: #00c878;
+            margin-bottom: 0.9rem;
+        }
+        .availability-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #00c878;
+            flex-shrink: 0;
+            animation: blink 2s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+        .contact-hero h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: #fff;
+        }
+        .contact-hero p {
+            font-size: 1rem;
+            opacity: 0.55;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        /* ── Two-column body ── */
+        .contact-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .contact-left,
+        .contact-right { min-width: 0; }
+
+        /* ── Section label ── */
+        .sec-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 0.65rem;
+        }
+        .contact-section {
+            margin-bottom: 1.75rem;
+        }
+
+        /* ── Message form ── */
+        .msg-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        .form-row input,
+        .msg-textarea {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.92rem;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.15s;
+        }
+        .form-row input {
+            flex: 1;
+            padding: 0.58rem 0.85rem;
+            width: 0; /* allow flex to shrink properly */
+        }
+        .form-row input::placeholder { opacity: 0.3; }
+        .form-row input:focus { outline: none; border-color: rgba(255,255,255,0.28); }
+        .msg-textarea {
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 140px;
+            padding: 0.7rem 0.85rem;
+            resize: vertical;
+        }
+        .msg-textarea::placeholder { opacity: 0.3; }
+        .msg-textarea:focus { outline: none; border-color: rgba(255,255,255,0.28); }
+        .form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding-top: 2px;
+        }
+        .form-note {
+            font-size: 0.75rem;
+            opacity: 0.3;
+        }
+        .send-btn {
+            background: #fff;
+            color: #111;
+            border: none;
+            border-radius: 8px;
+            padding: 0.52rem 1.25rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.15s, transform 0.1s;
+        }
+        .send-btn:hover  { background: #e2e2e2; }
+        .send-btn:active { transform: scale(0.97); }
+
+        /* ── Email row ── */
+        .email-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 9px;
+            padding: 0.65rem 0.9rem;
+        }
+        .email-addr {
+            flex: 1;
+            font-size: 0.88rem;
+            font-family: monospace;
+            color: #fff;
+            letter-spacing: 0.01em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            padding: 4px 11px;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.15s, color 0.15s;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+        .copy-btn.copied { color: #00c878; border-color: rgba(0,200,120,0.3); }
+
+        /* ── Icon grid ── */
+        .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+        .icon-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.7rem;
+            transition: color 0.2s;
+        }
+        .icon-link:hover { color: #fff; }
+        .icon-link img {
+            width: 42px;
+            height: 42px;
+            margin: 0;
+            filter: grayscale(100%);
+            transition: filter 0.2s, transform 0.2s;
+        }
+        .icon-link:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.3);
+        }
+        .icon-link svg {
+            width: 42px;
+            height: 42px;
+            opacity: 0.4;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .icon-link:hover svg {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        /* ── Divider between right sections ── */
+        .right-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            margin: 1.5rem 0;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 650px) {
+            .contact-body { grid-template-columns: 1fr; gap: 0; }
+            .form-row { flex-direction: column; }
+            .form-footer { flex-direction: column; align-items: flex-start; }
+            .contact-hero h2 { font-size: 1.7rem; }
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <a href="./index.html" class="logo">Shashank Satish Adsule</a>
-
-        <!-- navigation bar start -->
         <nav class="navbar">
             <a href="./index.html">Home</a>
             <a href="./AboutMe.html">About</a>
             <a href="./highlights.html">Highlights</a>
             <a href="./contact.html" class="active">Contact</a>
         </nav>
-        <!-- navigation bar end -->
     </header>
 
     <main>
-        <div class="contact_box">
-            <div class="email_box">
-                <label for="Email">Email: </label>
-                <input type="email" name="Email">
+        <div class="contact-page">
+
+            <!-- ── Hero ── -->
+            <div class="contact-hero">
+                <div class="availability-badge">
+                    <span class="availability-dot"></span>
+                    Open to research collaborations
+                </div>
+                <h2>Get in touch</h2>
+                <p>Happy to discuss AI, computer vision, open-source projects, or research ideas. I usually respond within a day or two.</p>
             </div>
 
-            <div class="accounts_icon">
-                <h2>social accounts</h2>
-                <div class="links_icons">
-                    <a href="https://www.linkedin.com/in/shashank-adsule-a1b91a200/" target="_blank"><img src="./images/icons/linkedin.svg" alt="Linkdin"></a>
-                    <a href="https://x.com/ShashankAdsule" target="_blank"><img src="./images/icons/twitter.svg" alt="Twiter"></a>
-                    <a href="https://www.linkedin.com/in/shashank-adsule-a1b91a200/" target="_blank"><img src="./images/place holder.svg" alt="instagram"></a>
+            <!-- ── Two-column body ── -->
+            <div class="contact-body">
+
+                <!-- LEFT: Send a message -->
+                <div class="contact-left">
+                    <div class="sec-label">Send a message</div>
+                    <div class="msg-form">
+                        <div class="form-row">
+                            <input type="text"  id="sender-name"  placeholder="Your name">
+                            <input type="email" id="sender-email" placeholder="your@email.com">
+                        </div>
+                        <textarea class="msg-textarea" id="sender-msg" placeholder="What's on your mind?"></textarea>
+                        <div class="form-footer">
+                            <span class="form-note">Opens your email client with this pre-filled.</span>
+                            <button class="send-btn" onclick="sendMail()">Send ↗</button>
+                        </div>
+                    </div>
                 </div>
 
-                <h2>Codeing accounts</h2>
-                <div class="links_icons">
-                    <a href="https://leetcode.com/u/shashank-adsule/" target="_blank"><img src="./images/icons/leetcode.svg" alt="Leetcode"></a>
-                    <a href="https://www.hackerrank.com/profile/shashank_s_adsu1" target="_blank"><img src="./images/icons/hackerrank.svg" alt="Hackerrank"></a>
-                    <a href="https://www.sololearn.com/en/profile/15055753" target="_blank"><img src="./images/icons/SoloLearn.svg" alt="Sololearn"></a>
+                <!-- RIGHT: Email + Social + Coding -->
+                <div class="contact-right">
+
+                    <!-- Email -->
+                    <div class="contact-section">
+                        <div class="sec-label">Email</div>
+                        <div class="email-row">
+                            <span style="opacity:0.5; font-size:1rem;">✉️</span>
+                            <!-- TODO: replace with your real email -->
+                            <span class="email-addr" id="email-text">shashank.adsule@example.com</span>
+                            <button class="copy-btn" id="copy-btn" onclick="copyEmail()">Copy</button>
+                        </div>
+                    </div>
+
+                    <!-- Social -->
+                    <div class="contact-section">
+                        <div class="sec-label">Social</div>
+                        <div class="icon-row">
+
+                            <a class="icon-link" href="https://www.linkedin.com/in/shashank-adsule-a1b91a200/" target="_blank">
+                                <img src="./images/icons/linkedin.svg" alt="LinkedIn">
+                                <span>LinkedIn</span>
+                            </a>
+
+                            <a class="icon-link" href="https://x.com/ShashankAdsule" target="_blank">
+                                <img src="./images/icons/twitter.svg" alt="X / Twitter">
+                                <span>Twitter</span>
+                            </a>
+
+                            <a class="icon-link" href="https://github.com/shashank-s-adsule" target="_blank">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.071 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                                </svg>
+                                <span>GitHub</span>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <hr class="right-divider">
+
+                    <!-- Coding profiles -->
+                    <div class="contact-section">
+                        <div class="sec-label">Coding profiles</div>
+                        <div class="icon-row">
+
+                            <a class="icon-link" href="https://leetcode.com/u/shashank-adsule/" target="_blank">
+                                <img src="./images/icons/leetcode.svg" alt="LeetCode">
+                                <span>LeetCode</span>
+                            </a>
+
+                            <a class="icon-link" href="https://www.hackerrank.com/profile/shashank_s_adsu1" target="_blank">
+                                <img src="./images/icons/hackerrank.svg" alt="HackerRank">
+                                <span>HackerRank</span>
+                            </a>
+
+                            <a class="icon-link" href="https://www.sololearn.com/en/profile/15055753" target="_blank">
+                                <img src="./images/icons/SoloLearn.svg" alt="Sololearn">
+                                <span>Sololearn</span>
+                            </a>
+
+                        </div>
+                    </div>
+
                 </div>
+                <!-- end right -->
 
             </div>
+            <!-- end contact-body -->
+
         </div>
     </main>
 
-
-    <!-- javascript -->
     <script src="./js/script.js"></script>
+    <script>
+        function copyEmail() {
+            var email = document.getElementById('email-text').textContent.trim();
+            navigator.clipboard.writeText(email).then(function () {
+                var btn = document.getElementById('copy-btn');
+                btn.classList.add('copied');
+                btn.textContent = '✓ Copied';
+                setTimeout(function () {
+                    btn.classList.remove('copied');
+                    btn.textContent = 'Copy';
+                }, 2000);
+            });
+        }
 
+        function sendMail() {
+            var name    = document.getElementById('sender-name').value.trim();
+            var replyTo = document.getElementById('sender-email').value.trim();
+            var body    = document.getElementById('sender-msg').value.trim();
+            if (!body) { document.getElementById('sender-msg').focus(); return; }
+            // TODO: replace with your real email address
+            var toEmail  = 'shashank.adsule@example.com';
+            var subject  = encodeURIComponent('Message from ' + (name || 'your portfolio'));
+            var bodyText = encodeURIComponent(
+                body +
+                (replyTo ? '\n\n--\nReply to: ' + replyTo : '') +
+                (name    ? '\n' + name : '')
+            );
+            window.location.href = 'mailto:' + toEmail + '?subject=' + subject + '&body=' + bodyText;
+        }
+    </script>
 </body>
 
 </html>

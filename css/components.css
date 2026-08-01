@@ -12,7 +12,11 @@
     color: var(--main-color);
 }
 
-/* --------------------- LOGO --------------------- */
+/* --------------------- LOGO & ICON --------------------- */
+:root {
+    --tab-icon-size: 20px;
+}
+
 .logo
 {
     font-size: 1.5625rem;
@@ -21,6 +25,16 @@
     cursor: default;
 }
 
+.tab-icon {
+    display: inline-block;
+    width: var(--tab-icon-size);
+    height: var(--tab-icon-size);
+    margin-right: 8px;
+    border-radius: 25%;
+    object-fit: contain;
+    vertical-align: middle;
+    flex: 0 0 var(--tab-icon-size);
+}
 
 /* ---------------contact------------------ */
 .contact_box{

@@ -15,13 +15,6 @@
 
     <style>
         /* ── About page inline styles ── */
-        /* Override global section { min-height: 100vh } from style.css */
-        main section,
-        main .about-section {
-            min-height: unset;
-            margin-top: 0;
-        }
-
         .about-hero {
             padding: 3rem 0 1.5rem;
         }
@@ -70,11 +63,24 @@
             margin: 0;
         }
         .about-card ul li {
-            padding: 0.35rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.6rem;
             font-size: 1.05rem;
             line-height: 1.5;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-radius: 6px;
+            transition: color 0.25s ease, transform 0.25s ease;
         }
+        .about-card ul li:hover {
+            background: linear-gradient(90deg, #ff8a00, #e233ff, #00aeff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateX(6px);
+        }
+        .about-card ul li .tab-icon { margin-right: 0; }
         .about-card ul li:last-child { border-bottom: none; }
 
         .about-section {
@@ -111,10 +117,19 @@
             margin: 0;
         }
         .project-list li {
-            padding: 0.6rem 0;
+            padding: 0.6rem;
             border-bottom: 1px solid rgba(255,255,255,0.07);
             line-height: 1.55;
             font-size: 1.05rem;
+            border-radius: 6px;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+        .project-list li:hover {
+            background: linear-gradient(90deg, #ff8a00, #e233ff, #00aeff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateX(6px);
         }
         .project-list li:last-child { border-bottom: none; }
 
@@ -236,26 +251,25 @@
             <div class="about-card">
                 <h3>What I Do</h3>
                 <ul>
-                    <li>👁️ Computer Vision</li>
-                    <li>🤖 Deep Learning</li>
-                    <li>🧠 Machine Learning</li>
-                    <li>📷 Image Processing</li>
-                    <li>🐍 Python &amp; C++</li>
-                    <li>🐧 Linux Development</li>
-                    <li>⚡ Model Optimization for Edge Devices</li>
+                    <li><img class="tab-icon" src="./images/icons/computer-vision.svg" alt="">Computer Vision</li>
+                    <li><img class="tab-icon" src="./images/icons/neural-net.svg" alt="">Deep Learning</li>
+                    <li><img class="tab-icon" src="./images/icons/machine-learning.svg" alt="">Machine Learning</li>
+                    <li><img class="tab-icon" src="./images/icons/image-processing.svg" alt="">Image Processing</li>
+                    <li><img class="tab-icon" src="./images/icons/codeing.svg" alt="">Competetive Programming</li>
+                    <li><img class="tab-icon" src="./images/icons/linux.svg" alt="">Linux Development</li>
+                    <li>Model Optimization for Edge Devices</li>
                 </ul>
             </div>
 
             <div class="about-card">
                 <h3>My Areas of Interest</h3>
                 <ul>
-                    <li>Computer Vision</li>
-                    <li>Image Processing</li>
-                    <li>Deep Learning</li>
+                    <li><img class="tab-icon" src="./images/icons/computer-vision.svg" alt="">Computer Vision</li>
+                    <li><img class="tab-icon" src="./images/icons/image-processing.svg" alt="">Image Processing</li>
+                    <li><img class="tab-icon" src="./images/icons/neural-net.svg" alt="">Deep Learning</li>
                     <li>Large Language Models (LLMs)</li>
                     <li>Natural Language Processing (NLP)</li>
                     <li>Generative AI</li>
-                    <li>Multimodal AI</li>
                     <li>Edge AI &amp; Model Deployment</li>
                 </ul>
             </div>
@@ -265,30 +279,14 @@
 
         <!-- ── Experience ── -->
         <section class="about-section">
-            <h3>💼 Experience</h3>
+            <h3>Experience</h3>
             <p>During my internship as a <strong>Research Associate Intern at Mantra Softech India Pvt. Ltd.</strong>, I worked on deploying and evaluating computer vision models for edge hardware. My work involved experimenting with modern object detection and face detection architectures, integrating AI models on specialized hardware, and improving inference workflows.</p>
         </section>
 
 
-
-        <!-- ── Highlights ── -->
-        <section class="about-section">
-            <h3>🚀 Projects</h3>
-            <p>Some of the projects I've worked on:</p>
-            <ul class="project-list">
-                <li>🎨 <strong>Neural Style Transfer</strong> — using VGG19 and PyTorch</li>
-                <li>🚗 <strong>Automatic Number Plate Recognition</strong> — using YOLOv8 and EasyOCR</li>
-                <li>📡 <strong>CLI Morse Code Generator</strong> — with audio (.wav) generation in C++</li>
-                <li>✏️ <strong>Image-to-Sketch Generation</strong> — using K-Means clustering and image processing techniques</li>
-            </ul>
-            <p style="margin-top:1rem;">These projects helped me gain practical experience with technologies such as PyTorch, OpenCV, TensorFlow, ONNX, Docker, and Linux development.</p>
-        </section>
-
-
-
         <!-- ── Currently Learning ── -->
         <section class="about-section">
-            <h3>📖 Currently Learning</h3>
+            <h3>Currently Learning</h3>
             <p>I'm continuously expanding my knowledge in modern AI technologies, especially:</p>
             <div class="tag-list">
                 <span class="tag">Large Language Models</span>
@@ -307,14 +305,14 @@
 
         <!-- ── Beyond Coding ── -->
         <section class="about-section">
-            <h3>🌿 Beyond Coding</h3>
+            <h3>Beyond Coding</h3>
             <p>Outside of programming, I enjoy:</p>
             <div class="tag-list">
-                <span class="tag">📚 Reading research papers</span>
-                <span class="tag">🧩 DSA problems</span>
-                <span class="tag">🛠️ Building side projects</span>
-                <span class="tag">🌱 Learning new tech</span>
-                <span class="tag">🎵 Indian flute</span>
+                <span class="tag">Reading research papers</span>
+                <span class="tag">DSA problems</span>
+                <span class="tag">Building side projects</span>
+                <span class="tag">Learning new tech</span>
+                <span class="tag">Indian flute</span>
             </div>
             <p style="margin-top:1rem;">I believe the best way to learn is by building, experimenting, and continuously improving.</p>
         </section>
@@ -323,7 +321,7 @@
 
         <!-- ── Let's Connect ── -->
         <section class="about-section">
-            <h3>🤝 Let's Connect</h3>
+            <h3>Let's Connect</h3>
             <p>I'm always interested in discussing:</p>
             <div class="connect-topics">
                 <span class="tag">Artificial Intelligence</span>
@@ -338,7 +336,7 @@
 
         <!-- ── Education ── -->
         <section class="about-section">
-            <h3>🎓 Education</h3>
+            <h3>Education</h3>
             <div class="edu-list">
 
                 <div class="edu-item">

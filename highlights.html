@@ -31,7 +31,6 @@
         .hl-tabs {
             display: flex;
             gap: 0.5rem;
-            padding: 0 4%;
             margin-bottom: 1.5rem;
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
@@ -45,6 +44,18 @@
             cursor: pointer;
             transition: color 0.2s, border-color 0.2s;
             margin-bottom: -1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+        .hl-tab[data-tab="projects"]::before {
+            content: "";
+            width: var(--tab-icon-size, 20px);
+            height: var(--tab-icon-size, 20px);
+            flex: 0 0 auto;
+            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
+            -webkit-mask: url("./images/icons/Project.svg") center / contain no-repeat;
+            mask: url("./images/icons/Project.svg") center / contain no-repeat;
         }
         .hl-tab:hover { color: rgba(255,255,255,0.75); }
         .hl-tab.active {
@@ -61,7 +72,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1rem;
-            padding: 0 4%;
         }
         .award-card {
             background: rgba(255,255,255,0.04);
@@ -87,9 +97,8 @@
 
         /* ── Achievement timeline ── */
         .ach-list {
-            padding: 0 4%;
             border-left: 2px solid rgba(255,255,255,0.1);
-            margin-left: calc(4% + 0.5rem);
+            margin-left: 0.5rem;
         }
         .ach-item {
             position: relative;
@@ -124,7 +133,6 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: rgba(255,255,255,0.3);
-            padding: 0 4%;
             margin: 1.5rem 0 0.75rem;
         }
 
@@ -132,13 +140,13 @@
     </style>
 
     <main>
-        <div class="mainhead" style="padding: 0 4%; margin-bottom: 1.25rem;">
+        <div class="mainhead">
             <h1>Highlights</h1>
         </div>
 
         <!-- Tab bar -->
         <div class="hl-tabs">
-            <button class="hl-tab active" data-tab="projects"><img src="./images/icons/Project.svg"> Projects</button>
+            <button class="hl-tab active" data-tab="projects">Projects</button>
             <button class="hl-tab" data-tab="awards">🎖️ Awards</button>
             <button class="hl-tab" data-tab="achievements">🏅 Achievements</button>
         </div>
