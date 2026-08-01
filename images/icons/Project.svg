@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Project part</title>
+  <desc id="desc">An isometric modular block representing one part of a project.</desc>
+  <path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+  <path d="M4 7.5v9L12 21v-9M20 7.5v9L12 21" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+  <path d="m12 12 3.5-2v4L12 16l-3.5-2v-4l3.5 2Z" fill="currentColor" opacity=".9"/>
+  <path d="m12 12 3.5-2L12 8l-3.5 2 3.5 2Z" fill="currentColor" opacity=".5"/>
+</svg>

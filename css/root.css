@@ -72,3 +72,8 @@ footer
     display: flex;
 
 }
+
+section {
+    min-height: 100vh;
+    margin-top: 5%;
+}

@@ -4,11 +4,6 @@
     color: var(--text-color);
 }
 
-section {
-    min-height: 100vh;
-    margin-top: 5%;
-}
-
 .home {
     display: flex;
     justify-content: center;
@@ -31,7 +26,6 @@ section {
 
 /*--------------------for highlights.html--------------------*/
 .mainhead {
-    /* text-align: center; */
     font-size: large;
     margin-bottom: 1.5%;
 }
