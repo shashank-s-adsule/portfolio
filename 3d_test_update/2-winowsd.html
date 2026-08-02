@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 95 Desktop UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+            background: teal;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,.03) 2px,
+                    rgba(0,0,0,.03) 4px
+                );
+            overflow: hidden;
+            height: 100vh;
+            cursor: default;
+        }
+
+        /* ==================== DESKTOP ICONS ==================== */
+        .desktop-icon {
+            position: absolute;
+            width: 80px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            padding: 5px;
+        }
+
+        .desktop-icon:hover {
+            background: rgba(0, 0, 127, 0.5);
+            border: 1px dotted white;
+        }
+
+        .desktop-icon:hover .icon-label {
+            background: #000080;
+            color: white;
+        }
+
+        .icon-image {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            filter: drop-shadow(1px 1px 0px rgba(255,255,255,0.5));
+        }
+
+        .icon-label {
+            font-size: 11px;
+            color: white;
+            text-shadow: 1px 1px 0px #000080;
+            line-height: 1.2;
+            padding: 2px;
+        }
+
+        /* ==================== WINDOW STYLES ==================== */
+        .window {
+            position: absolute;
+            background: linear-gradient(90deg, #000080 0%, #1084d7 100%);
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            box-shadow: 1px 1px 0 #ffffff inset, 2px 2px 0 #dfdfdf inset,
+                        1px 1px 0 #000000, 2px 2px 0 #808080;
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+            user-select: none;
+        }
+
+        .window.active {
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            box-shadow: 1px 1px 0 #ffffff inset, 2px 2px 0 #dfdfdf inset,
+                        1px 1px 0 #000000, 2px 2px 0 #808080;
+        }
+
+        .window.inactive {
+            opacity: 0.7;
+        }
+
+        /* Title Bar */
+        .window-title {
+            background: linear-gradient(90deg, #000080 0%, #1084d7 100%);
+            color: white;
+            padding: 2px 2px 2px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 1px 1px 1px 2px;
+        }
+
+        .window-title-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .window-title-icon {
+            width: 16px;
+            height: 16px;
+            font-size: 14px;
+        }
+
+        .window-buttons {
+            display: flex;
+            gap: 2px;
+        }
+
+        .window-btn {
+            width: 16px;
+            height: 14px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: bold;
+            color: black;
+            transition: all 0.1s;
+        }
+
+        .window-btn:active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+        }
+
+        .window-btn:hover {
+            background: #e0e0e0;
+        }
+
+        /* Window Content */
+        .window-content {
+            background: #c0c0c0;
+            flex: 1;
+            padding: 2px;
+            overflow: auto;
+            font-size: 11px;
+            color: #000;
+            max-height: calc(100% - 19px);
+        }
+
+        /* Status Bar */
+        .window-status {
+            background: #c0c0c0;
+            border-top: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 2px 2px;
+            font-size: 11px;
+            color: #000;
+        }
+
+        /* ==================== TASKBAR ==================== */
+        #taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background: #c0c0c0;
+            border-top: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            display: flex;
+            align-items: center;
+            padding: 2px 2px;
+            gap: 2px;
+            z-index: 9999;
+            box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+        }
+
+        .start-btn {
+            background: linear-gradient(180deg, #c0c0c0 0%, #808080 100%);
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 3px 8px;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            user-select: none;
+            transition: all 0.05s;
+        }
+
+        .start-btn:active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(180deg, #dfdfdf 0%, #a0a0a0 100%);
+        }
+
+        .start-icon {
+            width: 16px;
+            height: 14px;
+            background: linear-gradient(135deg, #00ff00, #ff0000, #0000ff, #ffff00);
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .taskbar-separator {
+            width: 2px;
+            height: 20px;
+            background: #dfdfdf;
+            border-right: 1px solid #808080;
+        }
+
+        .taskbar-item {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 2px 6px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.1s;
+            user-select: none;
+        }
+
+        .taskbar-item:hover {
+            background: #dfdfdf;
+        }
+
+        .taskbar-item.active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+            background: #a0a0a0;
+        }
+
+        .taskbar-spacer {
+            flex: 1;
+        }
+
+        .system-tray {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0 4px;
+            border-left: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+        }
+
+        .tray-icon {
+            width: 16px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .clock {
+            font-size: 11px;
+            font-weight: bold;
+            padding: 0 6px;
+        }
+
+        /* ==================== CONTEXT MENU ==================== */
+        .context-menu {
+            position: fixed;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            min-width: 150px;
+            z-index: 10000;
+            box-shadow: 1px 1px 0 #ffffff inset, 2px 2px 0 #dfdfdf inset,
+                        1px 1px 0 #000000, 2px 2px 0 #808080;
+            display: none;
+        }
+
+        .context-menu.visible {
+            display: block;
+        }
+
+        .context-menu-item {
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .context-menu-item:hover {
+            background: #000080;
+            color: white;
+        }
+
+        .context-menu-separator {
+            height: 2px;
+            background: #dfdfdf;
+            border-bottom: 1px solid #808080;
+            margin: 2px 0;
+        }
+
+        /* ==================== DIALOG ==================== */
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            box-shadow: 1px 1px 0 #ffffff inset, 2px 2px 0 #dfdfdf inset,
+                        1px 1px 0 #000000, 2px 2px 0 #808080;
+            min-width: 300px;
+            z-index: 10001;
+            display: none;
+        }
+
+        .dialog.visible {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dialog-title {
+            background: linear-gradient(90deg, #000080 0%, #1084d7 100%);
+            color: white;
+            padding: 2px 4px;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 2px solid #808080;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dialog-content {
+            padding: 10px;
+            background: #c0c0c0;
+            flex: 1;
+        }
+
+        .dialog-buttons {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            border-top: 2px solid #dfdfdf;
+        }
+
+        .btn {
+            padding: 4px 12px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            transition: all 0.05s;
+        }
+
+        .btn:hover {
+            background: #dfdfdf;
+        }
+
+        .btn:active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+        }
+
+        /* ==================== FOLDER CONTENTS ==================== */
+        .folder-item {
+            padding: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 2px;
+            border: 1px solid transparent;
+            transition: background 0.1s;
+        }
+
+        .folder-item:hover {
+            background: rgba(0, 0, 127, 0.3);
+            border: 1px solid rgba(0, 0, 127, 0.5);
+        }
+
+        .folder-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .folder-name {
+            font-size: 11px;
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .scrollbar {
+            width: 16px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+        }
+    </style>
+</head>
+<body>
+    <!-- Desktop Icons -->
+    <div class="desktop-icon" style="top: 10px; left: 10px;" data-app="my-computer">
+        <div class="icon-image">💾</div>
+        <div class="icon-label">My Computer</div>
+    </div>
+
+    <div class="desktop-icon" style="top: 10px; left: 100px;" data-app="recycle-bin">
+        <div class="icon-image">🗑️</div>
+        <div class="icon-label">Recycle Bin</div>
+    </div>
+
+    <div class="desktop-icon" style="top: 10px; left: 190px;" data-app="my-documents">
+        <div class="icon-image">📁</div>
+        <div class="icon-label">My Documents</div>
+    </div>
+
+    <div class="desktop-icon" style="top: 10px; left: 280px;" data-app="portfolio">
+        <div class="icon-image">🎨</div>
+        <div class="icon-label">Portfolio</div>
+    </div>
+
+    <div class="desktop-icon" style="top: 10px; left: 370px;" data-app="games">
+        <div class="icon-image">🎮</div>
+        <div class="icon-label">Games</div>
+    </div>
+
+    <div class="desktop-icon" style="top: 10px; left: 460px;" data-app="contact">
+        <div class="icon-image">✉️</div>
+        <div class="icon-label">Contact Me</div>
+    </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+        <button class="start-btn">
+            <div class="start-icon">✦</div>
+            <span>Start</span>
+        </button>
+        <div class="taskbar-separator"></div>
+        <div class="taskbar-spacer"></div>
+        <div class="system-tray">
+            <div class="tray-icon">📡</div>
+            <div class="tray-icon">🔊</div>
+            <div class="clock" id="clock">12:34</div>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="context-menu">
+        <div class="context-menu-item" data-action="new-folder">🆕 New Folder</div>
+        <div class="context-menu-item" data-action="new-shortcut">🔗 New Shortcut</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="paste">📋 Paste</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="properties">⚙️ Properties</div>
+    </div>
+
+    <!-- Floating Windows Container -->
+    <div id="windows-container"></div>
+
+    <!-- Dialogs -->
+    <div class="dialog" id="shutdown-dialog">
+        <div class="dialog-title">
+            <span>Shut Down Windows</span>
+            <button class="window-btn" onclick="closeDialog('shutdown-dialog')">✕</button>
+        </div>
+        <div class="dialog-content">
+            <p>What do you want the computer to do?</p>
+        </div>
+        <div class="dialog-buttons">
+            <button class="btn" onclick="selectShutdown('stand-by')">Stand By</button>
+            <button class="btn" onclick="selectShutdown('shut-down')">Shut Down</button>
+            <button class="btn" onclick="selectShutdown('restart')">Restart</button>
+            <button class="btn" onclick="closeDialog('shutdown-dialog')">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== DESKTOP CLASS ====================
+        class Windows95Desktop {
+            constructor() {
+                this.windows = [];
+                this.activeWindow = null;
+                this.zIndex = 100;
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.updateClock();
+                setInterval(() => this.updateClock(), 1000);
+            }
+
+            setupEventListeners() {
+                // Desktop icons
+                document.querySelectorAll('.desktop-icon').forEach(icon => {
+                    icon.addEventListener('dblclick', (e) => {
+                        this.openApp(e.target.closest('.desktop-icon').dataset.app);
+                    });
+                    icon.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        this.showContextMenu(e.clientX, e.clientY);
+                    });
+                });
+
+                // Right-click on desktop
+                document.addEventListener('contextmenu', (e) => {
+                    if (e.target === document.body || e.target.id === 'windows-container') {
+                        e.preventDefault();
+                        this.showContextMenu(e.clientX, e.clientY);
+                    }
+                });
+
+                // Click to hide context menu
+                document.addEventListener('click', () => {
+                    document.getElementById('context-menu').classList.remove('visible');
+                });
+
+                // Start button
+                document.querySelector('.start-btn').addEventListener('click', () => {
+                    this.showStartMenu();
+                });
+            }
+
+            openApp(appName) {
+                const windowContent = this.getWindowContent(appName);
+                const window = this.createWindow(windowContent.title, windowContent.content, appName);
+                this.windows.push(window);
+            }
+
+            getWindowContent(appName) {
+                const contents = {
+                    'my-computer': {
+                        title: 'My Computer',
+                        icon: '💾',
+                        content: `
+                            <div class="folder-item">
+                                <div class="folder-icon">💿</div>
+                                <div class="folder-name">Floppy (A:)</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">🖥️</div>
+                                <div class="folder-name">Local Disk (C:)</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">🖥️</div>
+                                <div class="folder-name">Local Disk (D:)</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">📀</div>
+                                <div class="folder-name">CD-ROM (E:)</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">🖨️</div>
+                                <div class="folder-name">Printers</div>
+                            </div>
+                        `
+                    },
+                    'my-documents': {
+                        title: 'My Documents',
+                        icon: '📁',
+                        content: `
+                            <div class="folder-item">
+                                <div class="folder-icon">📄</div>
+                                <div class="folder-name">resume.txt</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">📄</div>
+                                <div class="folder-name">projects.txt</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">📁</div>
+                                <div class="folder-name">Archive</div>
+                            </div>
+                        `
+                    },
+                    'portfolio': {
+                        title: 'Portfolio Projects',
+                        icon: '🎨',
+                        content: `
+                            <div class="folder-item">
+                                <div class="folder-icon">🎨</div>
+                                <div class="folder-name">Web Design Project</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">🤖</div>
+                                <div class="folder-name">AI Computer Vision</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">📊</div>
+                                <div class="folder-name">Data Analysis</div>
+                            </div>
+                        `
+                    },
+                    'games': {
+                        title: 'Games',
+                        icon: '🎮',
+                        content: `
+                            <div class="folder-item">
+                                <div class="folder-icon">👽</div>
+                                <div class="folder-name">Space Invaders</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">🐸</div>
+                                <div class="folder-name">Frogger</div>
+                            </div>
+                            <div class="folder-item">
+                                <div class="folder-icon">🎮</div>
+                                <div class="folder-name">Minesweeper</div>
+                            </div>
+                        `
+                    },
+                    'contact': {
+                        title: 'Contact Info',
+                        icon: '✉️',
+                        content: `
+                            <div style="padding: 10px;">
+                                <p><strong>Email:</strong> hello@example.com</p>
+                                <p><strong>LinkedIn:</strong> linkedin.com/in/yourname</p>
+                                <p><strong>GitHub:</strong> github.com/yourname</p>
+                                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                            </div>
+                        `
+                    },
+                    'recycle-bin': {
+                        title: 'Recycle Bin',
+                        icon: '🗑️',
+                        content: `
+                            <div style="padding: 20px; text-align: center; color: #666;">
+                                <p>Recycle Bin is empty</p>
+                            </div>
+                        `
+                    }
+                };
+
+                return contents[appName] || { title: 'Unknown', icon: '?', content: 'App not found' };
+            }
+
+            createWindow(title, content, appName) {
+                const windowEl = document.createElement('div');
+                windowEl.className = 'window active';
+                windowEl.style.left = (100 + Math.random() * 200) + 'px';
+                windowEl.style.top = (100 + Math.random() * 200) + 'px';
+                windowEl.style.zIndex = this.zIndex++;
+                windowEl.style.width = '300px';
+
+                const titleBar = document.createElement('div');
+                titleBar.className = 'window-title';
+                titleBar.innerHTML = `
+                    <div class="window-title-text">
+                        <span style="font-size: 14px;">📁</span>
+                        <span>${title}</span>
+                    </div>
+                    <div class="window-buttons">
+                        <button class="window-btn" title="Minimize">_</button>
+                        <button class="window-btn" title="Maximize">□</button>
+                        <button class="window-btn" title="Close">✕</button>
+                    </div>
+                `;
+
+                const contentArea = document.createElement('div');
+                contentArea.className = 'window-content';
+                contentArea.innerHTML = content;
+
+                const statusBar = document.createElement('div');
+                statusBar.className = 'window-status';
+                statusBar.textContent = '1 object(s)';
+
+                windowEl.appendChild(titleBar);
+                windowEl.appendChild(contentArea);
+                windowEl.appendChild(statusBar);
+
+                document.getElementById('windows-container').appendChild(windowEl);
+
+                // Make window draggable
+                this.makeWindowDraggable(windowEl);
+
+                // Close button
+                titleBar.querySelector('.window-btn:last-child').addEventListener('click', () => {
+                    windowEl.remove();
+                    this.windows = this.windows.filter(w => w !== windowEl);
+                });
+
+                // Window focus
+                windowEl.addEventListener('mousedown', () => {
+                    windowEl.style.zIndex = this.zIndex++;
+                    windowEl.classList.add('active');
+                    windowEl.classList.remove('inactive');
+                });
+
+                // Add to taskbar
+                this.addToTaskbar(windowEl, title, appName);
+
+                return windowEl;
+            }
+
+            makeWindowDraggable(windowEl) {
+                const titleBar = windowEl.querySelector('.window-title');
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+                titleBar.addEventListener('mousedown', (e) => {
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+
+                    document.addEventListener('mousemove', drag);
+                    document.addEventListener('mouseup', () => {
+                        document.removeEventListener('mousemove', drag);
+                    });
+                });
+
+                const drag = (e) => {
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+
+                    windowEl.style.top = (windowEl.offsetTop - pos2) + 'px';
+                    windowEl.style.left = (windowEl.offsetLeft - pos1) + 'px';
+                };
+            }
+
+            addToTaskbar(windowEl, title, appName) {
+                const taskbarItem = document.createElement('div');
+                taskbarItem.className = 'taskbar-item active';
+                taskbarItem.textContent = title;
+
+                const taskbar = document.getElementById('taskbar');
+                taskbar.insertBefore(taskbarItem, taskbar.querySelector('.taskbar-spacer'));
+
+                taskbarItem.addEventListener('click', () => {
+                    windowEl.style.zIndex = this.zIndex++;
+                    if (windowEl.style.display === 'none') {
+                        windowEl.style.display = 'flex';
+                    }
+                });
+
+                windowEl.addEventListener('remove', () => {
+                    taskbarItem.remove();
+                });
+            }
+
+            showContextMenu(x, y) {
+                const menu = document.getElementById('context-menu');
+                menu.style.left = x + 'px';
+                menu.style.top = y + 'px';
+                menu.classList.add('visible');
+            }
+
+            showStartMenu() {
+                alert('Start Menu functionality coming soon!');
+            }
+
+            updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                document.getElementById('clock').textContent = `${hours}:${minutes}`;
+            }
+        }
+
+        // Initialize
+        const desktop = new Windows95Desktop();
+
+        function closeDialog(id) {
+            document.getElementById(id).classList.remove('visible');
+        }
+
+        function selectShutdown(action) {
+            alert(`Selected: ${action}`);
+            closeDialog('shutdown-dialog');
+        }
+
+        // Open a window on startup
+        window.addEventListener('load', () => {
+            desktop.openApp('my-computer');
+        });
+    </script>
+</body>
+</html>

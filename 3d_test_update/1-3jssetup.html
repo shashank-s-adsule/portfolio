@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 90s PC - Three.js Setup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #ui-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 300px;
+        }
+
+        .info-label {
+            margin: 5px 0;
+            color: #00ff00;
+        }
+
+        .info-value {
+            color: #ffff00;
+            margin-left: 10px;
+        }
+
+        #loading-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            z-index: 1000;
+            font-size: 18px;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 20px;
+            border: 2px solid #00ff00;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: #00ff00;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #instruction-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-width: 250px;
+            border: 2px solid #00ff00;
+        }
+
+        .instruction {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        .key {
+            background: #00ff00;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <div id="loading-screen">
+        <div>INITIALIZING 3D ENGINE...</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div style="margin-top: 20px;">Please wait...</div>
+    </div>
+
+    <div id="ui-overlay">
+        <div class="info-label">📊 Scene Stats</div>
+        <div class="info-label">FPS: <span class="info-value" id="fps">60</span></div>
+        <div class="info-label">Models: <span class="info-value" id="model-count">0</span></div>
+        <div class="info-label">Triangles: <span class="info-value" id="triangle-count">0</span></div>
+        <div style="margin-top: 10px; border-top: 1px solid #00ff00; padding-top: 10px;">
+            <div class="info-label">🎮 Camera</div>
+            <div class="info-label">X: <span class="info-value" id="cam-x">0</span></div>
+            <div class="info-label">Y: <span class="info-value" id="cam-y">0</span></div>
+            <div class="info-label">Z: <span class="info-value" id="cam-z">0</span></div>
+        </div>
+    </div>
+
+    <div id="instruction-panel">
+        <div style="color: #ffff00; margin-bottom: 10px; font-weight: bold;">⌨️ CONTROLS</div>
+        <div class="instruction"><span class="key">MOUSE</span> - Rotate camera</div>
+        <div class="instruction"><span class="key">W</span> <span class="key">A</span> <span class="key">S</span> <span class="key">D</span> - Move camera</div>
+        <div class="instruction"><span class="key">SPACE</span> - Up</div>
+        <div class="instruction"><span class="key">SHIFT</span> - Down</div>
+        <div class="instruction"><span class="key">R</span> - Reset camera</div>
+        <div class="instruction"><span class="key">L</span> - Toggle lights</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ==================== CONFIGURATION ====================
+        const CONFIG = {
+            scene: {
+                background: new THREE.Color(0x1a1a2e),
+                fog: {
+                    color: 0x1a1a2e,
+                    near: 0.1,
+                    far: 1000
+                }
+            },
+            camera: {
+                fov: 75,
+                near: 0.1,
+                far: 2000,
+                position: { x: 3, y: 2.5, z: 4 }
+            },
+            lights: {
+                ambientIntensity: 0.6,
+                directionalIntensity: 0.8,
+                pointLightIntensity: 0.5
+            }
+        };
+
+        // ==================== SCENE SETUP ====================
+        let scene, camera, renderer, controls = {};
+        let loadingProgress = 0;
+
+        function initScene() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = CONFIG.scene.background;
+            scene.fog = new THREE.Fog(
+                CONFIG.scene.fog.color,
+                CONFIG.scene.fog.near,
+                CONFIG.scene.fog.far
+            );
+
+            // Camera
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            camera = new THREE.PerspectiveCamera(
+                CONFIG.camera.fov,
+                width / height,
+                CONFIG.camera.near,
+                CONFIG.camera.far
+            );
+            camera.position.set(
+                CONFIG.camera.position.x,
+                CONFIG.camera.position.y,
+                CONFIG.camera.position.z
+            );
+            camera.lookAt(0, 1, 0);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFShadowShadowMap;
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            // Lighting
+            setupLighting();
+
+            // Placeholder: Computer Model (we'll replace with actual model later)
+            createPlaceholderComputer();
+
+            // Environment
+            createFloor();
+
+            console.log('✅ Scene initialized');
+        }
+
+        function setupLighting() {
+            // Ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, CONFIG.lights.ambientIntensity);
+            scene.add(ambientLight);
+
+            // Directional light (sun)
+            const directionalLight = new THREE.DirectionalLight(0xffffff, CONFIG.lights.directionalIntensity);
+            directionalLight.position.set(5, 8, 5);
+            directionalLight.target.position.set(0, 1, 0);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            directionalLight.shadow.camera.left = -10;
+            directionalLight.shadow.camera.right = 10;
+            directionalLight.shadow.camera.top = 10;
+            directionalLight.shadow.camera.bottom = -10;
+            scene.add(directionalLight);
+            scene.add(directionalLight.target);
+
+            // Point light (warm desk lamp)
+            const pointLight = new THREE.PointLight(0xffa500, CONFIG.lights.pointLightIntensity);
+            pointLight.position.set(2, 3, -2);
+            pointLight.castShadow = true;
+            scene.add(pointLight);
+        }
+
+        function createPlaceholderComputer() {
+            // Monitor (placeholder geometry)
+            const monitorGeometry = new THREE.BoxGeometry(0.5, 0.4, 0.08);
+            const monitorMaterial = new THREE.MeshStandardMaterial({
+                color: 0x1a1a1a,
+                metalness: 0.3,
+                roughness: 0.4
+            });
+            const monitor = new THREE.Mesh(monitorGeometry, monitorMaterial);
+            monitor.position.set(0, 1.2, 0);
+            monitor.castShadow = true;
+            monitor.receiveShadow = true;
+            monitor.userData.name = 'Monitor';
+            scene.add(monitor);
+
+            // Monitor stand
+            const standGeometry = new THREE.BoxGeometry(0.4, 0.2, 0.1);
+            const standMaterial = new THREE.MeshStandardMaterial({
+                color: 0x333333,
+                metalness: 0.5,
+                roughness: 0.5
+            });
+            const stand = new THREE.Mesh(standGeometry, standMaterial);
+            stand.position.set(0, 0.8, 0);
+            stand.castShadow = true;
+            stand.receiveShadow = true;
+            stand.userData.name = 'Stand';
+            scene.add(stand);
+
+            // Keyboard (placeholder)
+            const keyboardGeometry = new THREE.BoxGeometry(0.5, 0.05, 0.2);
+            const keyboardMaterial = new THREE.MeshStandardMaterial({
+                color: 0x2a2a2a,
+                metalness: 0.2,
+                roughness: 0.6
+            });
+            const keyboard = new THREE.Mesh(keyboardGeometry, keyboardMaterial);
+            keyboard.position.set(0, 0.6, 0.3);
+            keyboard.castShadow = true;
+            keyboard.receiveShadow = true;
+            keyboard.userData.name = 'Keyboard';
+            scene.add(keyboard);
+
+            // Mouse (placeholder)
+            const mouseGeometry = new THREE.SphereGeometry(0.04, 16, 16);
+            const mouseMaterial = new THREE.MeshStandardMaterial({
+                color: 0x4a4a4a,
+                metalness: 0.3,
+                roughness: 0.5
+            });
+            const mouse = new THREE.Mesh(mouseGeometry, mouseMaterial);
+            mouse.position.set(0.35, 0.61, 0.4);
+            mouse.castShadow = true;
+            mouse.receiveShadow = true;
+            mouse.userData.name = 'Mouse';
+            scene.add(mouse);
+        }
+
+        function createFloor() {
+            const floorGeometry = new THREE.PlaneGeometry(20, 20);
+            const floorMaterial = new THREE.MeshStandardMaterial({
+                color: 0x4a4a4a,
+                metalness: 0.1,
+                roughness: 0.8
+            });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.position.y = 0;
+            floor.receiveShadow = true;
+            scene.add(floor);
+        }
+
+        // ==================== INPUT HANDLING ====================
+        function setupInputHandling() {
+            const cameraSpeed = 0.05;
+            const keys = {};
+
+            window.addEventListener('keydown', (e) => {
+                keys[e.key.toUpperCase()] = true;
+
+                // Reset camera
+                if (e.key.toUpperCase() === 'R') {
+                    camera.position.set(
+                        CONFIG.camera.position.x,
+                        CONFIG.camera.position.y,
+                        CONFIG.camera.position.z
+                    );
+                    camera.lookAt(0, 1, 0);
+                }
+
+                // Toggle lights
+                if (e.key.toUpperCase() === 'L') {
+                    scene.children.forEach(obj => {
+                        if (obj instanceof THREE.Light) {
+                            obj.visible = !obj.visible;
+                        }
+                    });
+                }
+            });
+
+            window.addEventListener('keyup', (e) => {
+                keys[e.key.toUpperCase()] = false;
+            });
+
+            // Mouse controls
+            let mouseX = 0, mouseY = 0;
+            const mouseSpeed = 0.005;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX / window.innerWidth;
+                mouseY = e.clientY / window.innerHeight;
+            });
+
+            // Animation loop integration
+            function updateControls() {
+                if (keys['W']) camera.position.z -= cameraSpeed;
+                if (keys['S']) camera.position.z += cameraSpeed;
+                if (keys['A']) camera.position.x -= cameraSpeed;
+                if (keys['D']) camera.position.x += cameraSpeed;
+                if (keys[' ']) camera.position.y += cameraSpeed;
+                if (keys['SHIFT']) camera.position.y -= cameraSpeed;
+            }
+
+            return updateControls;
+        }
+
+        // ==================== ANIMATION LOOP ====================
+        let frameCount = 0;
+        let lastFpsTime = Date.now();
+        let fps = 60;
+
+        const updateControls = setupInputHandling();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update controls
+            updateControls();
+
+            // Rotate placeholder computer
+            scene.children.forEach(obj => {
+                if (obj.userData.name === 'Monitor') {
+                    obj.rotation.y += 0.002;
+                }
+            });
+
+            // Render
+            renderer.render(scene, camera);
+
+            // Update stats
+            frameCount++;
+            const now = Date.now();
+            if (now - lastFpsTime >= 1000) {
+                fps = frameCount;
+                frameCount = 0;
+                lastFpsTime = now;
+            }
+
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('fps').textContent = fps;
+            document.getElementById('model-count').textContent = scene.children.length;
+            document.getElementById('cam-x').textContent = camera.position.x.toFixed(2);
+            document.getElementById('cam-y').textContent = camera.position.y.toFixed(2);
+            document.getElementById('cam-z').textContent = camera.position.z.toFixed(2);
+
+            // Count triangles
+            let triangles = 0;
+            scene.traverse(obj => {
+                if (obj.geometry) {
+                    if (obj.geometry.index) {
+                        triangles += obj.geometry.index.count / 3;
+                    } else {
+                        triangles += obj.geometry.attributes.position.count / 3;
+                    }
+                }
+            });
+            document.getElementById('triangle-count').textContent = triangles;
+        }
+
+        // ==================== INITIALIZATION ====================
+        window.addEventListener('load', () => {
+            // Simulate loading
+            const loadingInterval = setInterval(() => {
+                loadingProgress += Math.random() * 30;
+                if (loadingProgress > 90) loadingProgress = 90;
+                document.querySelector('.loading-progress').style.width = loadingProgress + '%';
+            }, 100);
+
+            // Initialize scene
+            initScene();
+
+            // Hide loading screen and show UI
+            setTimeout(() => {
+                loadingProgress = 100;
+                document.querySelector('.loading-progress').style.width = '100%';
+                setTimeout(() => {
+                    document.getElementById('loading-screen').classList.add('hidden');
+                    animate();
+                }, 500);
+            }, 2000);
+
+            clearInterval(loadingInterval);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        });
+    </script>
+</body>
+</html>

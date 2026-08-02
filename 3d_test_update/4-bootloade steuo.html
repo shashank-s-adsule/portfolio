@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90s PC Boot Sequence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #boot-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .crt-monitor {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+        }
+
+        /* CRT Scanlines */
+        .crt-monitor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 10;
+            animation: scanlines 0.15s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(4px);
+            }
+        }
+
+        /* CRT Glow/Flicker */
+        .crt-monitor::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        .boot-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        #bios-text {
+            text-align: left;
+            margin: 40px 0;
+            height: 300px;
+            overflow-y: auto;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 12px;
+            line-height: 1.8;
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        .bios-line {
+            opacity: 0;
+            animation: fadeIn 0.3s ease-out forwards;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .bios-line.active {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .bios-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background: #00ff00;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49%, 100% {
+                opacity: 1;
+            }
+            50%, 99% {
+                opacity: 0;
+            }
+        }
+
+        .status-bar {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            border: 2px solid #00ff00;
+            height: 24px;
+            background: #001a00;
+            position: relative;
+            box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.2);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #00aa00);
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), inset 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 11px;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .desktop-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: teal;
+            opacity: 0;
+            transition: opacity 1s ease-out;
+            z-index: -1;
+        }
+
+        .desktop-area.visible {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .boot-complete {
+            opacity: 0;
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .boot-complete.hidden {
+            display: none;
+        }
+
+        /* Windows 95 Elements for when boot is complete */
+        .desktop-ready {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background: #c0c0c0;
+            border-top: 2px solid #dfdfdf;
+            display: none;
+            align-items: center;
+            padding: 2px;
+            z-index: 100;
+        }
+
+        .desktop-ready.visible {
+            display: flex;
+        }
+
+        .start-btn-boot {
+            background: linear-gradient(180deg, #c0c0c0 0%, #808080 100%);
+            border: 2px solid #dfdfdf;
+            padding: 3px 8px;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+        }
+
+        .error-message {
+            color: #ff6666;
+            margin: 20px 0;
+            display: none;
+            animation: glitch 0.3s infinite;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                text-shadow: 2px 0 #ff0000;
+            }
+            50% {
+                text-shadow: -2px 0 #0000ff;
+            }
+        }
+
+        .skip-boot-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .skip-boot-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .skip-boot-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div id="boot-screen" class="crt-monitor">
+        <div class="boot-content">
+            <div style="font-size: 24px; margin-bottom: 40px; text-shadow: 0 0 10px #00ff00;">
+                ▼ RETRO COMPUTER SYSTEM ▼
+            </div>
+
+            <div id="bios-text"></div>
+
+            <div class="status-bar">
+                <div id="status-message" style="margin-bottom: 15px;"></div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                    <div class="progress-text" id="progress-text">0%</div>
+                </div>
+            </div>
+
+            <div class="error-message" id="error-message"></div>
+
+            <button class="skip-boot-btn" onclick="skipBootSequence()">SKIP BOOT [ESC]</button>
+        </div>
+    </div>
+
+    <div class="desktop-area" id="desktop-area"></div>
+    <div class="desktop-ready" id="desktop-taskbar"></div>
+
+    <script>
+        // ==================== BOOT SEQUENCE CONFIGURATION ====================
+        const BOOT_CONFIG = {
+            biosLines: [
+                'BIOS v1.2.3 - 1997 RETRO TECH',
+                'Copyright (C) 1997 Phoenix BIOS',
+                '',
+                'Detecting CPU...',
+                'CPU: Intel Pentium III @ 800 MHz',
+                'Cache: 512 KB L2',
+                '',
+                'Memory Test:',
+                '- SIMM #0 128 MB ... OK',
+                '- SIMM #1 128 MB ... OK',
+                '- Total RAM: 256 MB',
+                '',
+                'Detecting Hard Drives...',
+                '- IDE Primary Master: Western Digital 20GB ... OK',
+                '',
+                'Initializing Chipset...',
+                'Setting up ISA devices...',
+                'Initializing PCI...',
+                'PCI enumeration: 12 devices found',
+                '',
+                'Initializing Video Card...',
+                '- AGP Graphics: NVIDIA GeForce4 MX440 - 64MB',
+                '- VRAM: 64 MB DDR',
+                '',
+                'Initializing Audio...',
+                '- Sound Card: Creative Sound Blaster Live',
+                '',
+                'Initializing Network...',
+                '- Ethernet: 10/100 NIC Detected',
+                '',
+                'Boot Device Priority:',
+                '1. Floppy Drive',
+                '2. IDE Hard Drive',
+                '3. CD-ROM',
+                '',
+                'Starting Windows 95 Setup...',
+                'Loading vmm32.vxd...',
+                'Loading system drivers...'
+            ],
+            loadingMessages: [
+                'Initializing Hardware Abstraction Layer...',
+                'Loading Device Drivers...',
+                'Starting Windows...',
+                'Loading User Profile...',
+                'Starting Desktop...',
+                'Loading System Tray...',
+                'Loading Taskbar...',
+                'Starting Shell...'
+            ],
+            soundEnabled: true
+        };
+
+        // ==================== BOOT SEQUENCE CLASS ====================
+        class BootSequence {
+            constructor() {
+                this.currentPhase = 'bios';
+                this.progress = 0;
+                this.soundContext = null;
+                this.isSkipped = false;
+            }
+
+            async start() {
+                console.log('🖥️ Boot sequence started');
+                
+                // Phase 1: BIOS Text Display
+                await this.displayBIOSText();
+                
+                if (this.isSkipped) {
+                    this.complete();
+                    return;
+                }
+
+                // Phase 2: Loading Sequence
+                await this.displayLoadingSequence();
+                
+                if (this.isSkipped) {
+                    this.complete();
+                    return;
+                }
+
+                // Phase 3: Windows Startup Sound
+                await this.playStartupSound();
+                
+                // Phase 4: Desktop Fade In
+                await this.fadeToDesktop();
+            }
+
+            async displayBIOSText() {
+                const biosContainer = document.getElementById('bios-text');
+                document.getElementById('status-message').textContent = 'SYSTEM BIOS';
+
+                let lineDelay = 0;
+
+                for (let i = 0; i < BOOT_CONFIG.biosLines.length; i++) {
+                    if (this.isSkipped) break;
+
+                    await this.delay(150);
+                    lineDelay = i;
+
+                    const line = document.createElement('div');
+                    line.className = 'bios-line';
+                    line.textContent = BOOT_CONFIG.biosLines[i];
+                    biosContainer.appendChild(line);
+
+                    // Auto-scroll
+                    biosContainer.scrollTop = biosContainer.scrollHeight;
+
+                    // Update progress
+                    this.progress = (i / BOOT_CONFIG.biosLines.length) * 30;
+                    this.updateProgressBar();
+                }
+
+                // Add cursor
+                await this.delay(500);
+                if (!this.isSkipped) {
+                    const cursor = document.createElement('span');
+                    cursor.className = 'bios-cursor';
+                    biosContainer.appendChild(cursor);
+                }
+
+                await this.delay(1000);
+            }
+
+            async displayLoadingSequence() {
+                const biosContainer = document.getElementById('bios-text');
+                document.getElementById('status-message').textContent = 'LOADING WINDOWS 95...';
+
+                // Clear bios cursor
+                const cursor = biosContainer.querySelector('.bios-cursor');
+                if (cursor) cursor.remove();
+
+                // Simulate loading
+                const startProgress = 30;
+                const endProgress = 90;
+                const duration = 3000; // 3 seconds
+                const startTime = Date.now();
+
+                while ((Date.now() - startTime) < duration && !this.isSkipped) {
+                    const elapsed = Date.now() - startTime;
+                    const progress = startProgress + ((elapsed / duration) * (endProgress - startProgress));
+                    this.progress = progress;
+                    this.updateProgressBar();
+
+                    // Randomly add loading messages
+                    if (Math.random() > 0.7) {
+                        const message = BOOT_CONFIG.loadingMessages[
+                            Math.floor(Math.random() * BOOT_CONFIG.loadingMessages.length)
+                        ];
+                        
+                        const line = document.createElement('div');
+                        line.className = 'bios-line';
+                        line.textContent = message;
+                        biosContainer.appendChild(line);
+                        biosContainer.scrollTop = biosContainer.scrollHeight;
+                    }
+
+                    await this.delay(100);
+                }
+
+                // Complete loading
+                if (!this.isSkipped) {
+                    this.progress = 95;
+                    this.updateProgressBar();
+                    
+                    const finalLine = document.createElement('div');
+                    finalLine.className = 'bios-line';
+                    finalLine.textContent = '';
+                    biosContainer.appendChild(finalLine);
+
+                    await this.delay(800);
+                }
+            }
+
+            async playStartupSound() {
+                if (!BOOT_CONFIG.soundEnabled || this.isSkipped) return;
+
+                try {
+                    // Create a simple beep sound using Web Audio API
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    
+                    // Startup chord (C-E-G = success sound)
+                    const notes = [262, 330, 392]; // C, E, G frequency
+                    
+                    for (let freq of notes) {
+                        if (this.isSkipped) break;
+                        
+                        const oscillator = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        
+                        oscillator.connect(gain);
+                        gain.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = freq;
+                        oscillator.type = 'sine';
+                        
+                        gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                        
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.2);
+                        
+                        await this.delay(100);
+                    }
+                } catch (error) {
+                    console.log('Audio context not available');
+                }
+            }
+
+            async fadeToDesktop() {
+                if (this.isSkipped) {
+                    // Instant fade
+                    document.getElementById('boot-screen').style.opacity = '0';
+                    document.getElementById('boot-screen').style.pointerEvents = 'none';
+                    document.getElementById('desktop-area').classList.add('visible');
+                    document.getElementById('desktop-taskbar').classList.add('visible');
+                    return;
+                }
+
+                this.progress = 100;
+                this.updateProgressBar();
+
+                document.getElementById('status-message').textContent = 'STARTING WINDOWS DESKTOP...';
+                
+                await this.delay(500);
+
+                // Fade out boot screen
+                const bootScreen = document.getElementById('boot-screen');
+                let opacity = 1;
+                const fadeInterval = setInterval(() => {
+                    opacity -= 0.05;
+                    bootScreen.style.opacity = opacity;
+                    
+                    if (opacity <= 0) {
+                        clearInterval(fadeInterval);
+                        bootScreen.style.pointerEvents = 'none';
+                    }
+                }, 30);
+
+                // Fade in desktop
+                await this.delay(100);
+                const desktopArea = document.getElementById('desktop-area');
+                desktopArea.classList.add('visible');
+
+                await this.delay(500);
+                document.getElementById('desktop-taskbar').classList.add('visible');
+            }
+
+            updateProgressBar() {
+                const bar = document.getElementById('progress-bar');
+                const text = document.getElementById('progress-text');
+                
+                const percentage = Math.min(100, Math.max(0, this.progress));
+                bar.style.width = percentage + '%';
+                text.textContent = Math.floor(percentage) + '%';
+            }
+
+            async delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            complete() {
+                console.log('✅ Boot sequence complete');
+                // Emit event or callback
+                window.dispatchEvent(new CustomEvent('bootComplete'));
+            }
+
+            skip() {
+                console.log('⏭️  Boot sequence skipped');
+                this.isSkipped = true;
+                this.progress = 100;
+                this.updateProgressBar();
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        let bootSequence = null;
+
+        window.addEventListener('load', () => {
+            bootSequence = new BootSequence();
+            bootSequence.start();
+        });
+
+        function skipBootSequence() {
+            if (bootSequence) {
+                bootSequence.skip();
+            }
+        }
+
+        // ESC key to skip
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                skipBootSequence();
+            }
+        });
+
+        // Boot complete event
+        window.addEventListener('bootComplete', () => {
+            console.log('🎉 Boot complete - Ready for desktop interaction');
+            // You can add your desktop initialization here
+        });
+    </script>
+</body>
+</html>

@@ -14,7 +14,7 @@
     <title>Shashank Satish Adsule</title>
 
     <style>
-        /* ── About page inline styles ── */
+        /* ── About hero ── */
         .about-hero {
             padding: 3rem 0 1.5rem;
         }
@@ -34,61 +34,15 @@
             font-size: 1.1rem;
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        @media (max-width: 700px) {
-            .about-grid { grid-template-columns: 1fr; }
-        }
-
-        .about-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 1.5rem 1.75rem;
-        }
-        .about-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .about-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .about-card ul li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.45rem 0.6rem;
-            font-size: 1.05rem;
-            line-height: 1.5;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            border-radius: 6px;
-            transition: color 0.25s ease, transform 0.25s ease;
-        }
-        .about-card ul li:hover {
-            background: linear-gradient(90deg, #ff8a00, #e233ff, #00aeff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transform: translateX(6px);
-        }
-        .about-card ul li .tab-icon { margin-right: 0; }
-        .about-card ul li:last-child { border-bottom: none; }
-
+        /* ── Section wrapper ── */
         .about-section {
             margin: 2.5rem 0;
         }
         .about-section h3 {
             font-size: 1.45rem;
             margin-bottom: 1rem;
+            padding-left: 0.75rem;
+            border-left: 3px solid rgba(255,255,255,0.3);
         }
         .about-section p {
             line-height: 1.75;
@@ -97,56 +51,7 @@
             font-size: 1.1rem;
         }
 
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-        .tag {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 20px;
-            padding: 0.3rem 0.85rem;
-            font-size: 1rem;
-        }
-
-        .project-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .project-list li {
-            padding: 0.6rem;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-            line-height: 1.55;
-            font-size: 1.05rem;
-            border-radius: 6px;
-            transition: color 0.25s ease, transform 0.25s ease;
-        }
-        .project-list li:hover {
-            background: linear-gradient(90deg, #ff8a00, #e233ff, #00aeff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transform: translateX(6px);
-        }
-        .project-list li:last-child { border-bottom: none; }
-
-        .connect-topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .divider {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            margin: 2rem 0;
-        }
-
-        /* ── Education list ── */
+        /* ── Education timeline ── */
         .edu-list {
             border-left: 2px solid rgba(255,255,255,0.12);
             margin-left: 0.5rem;
@@ -217,6 +122,203 @@
             .edu-header { flex-direction: column; }
             .edu-meta { text-align: left; }
         }
+
+        /* ── Experience card ── */
+        .exp-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .exp-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.5rem 1.75rem;
+            max-width: 780px;
+        }
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .exp-role {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+        .exp-company {
+            display: block;
+            font-size: 0.97rem;
+            opacity: 0.7;
+        }
+        .exp-meta {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .exp-duration {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.55;
+        }
+        .exp-location {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.4;
+            margin-top: 0.15rem;
+        }
+        .exp-bullets {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .exp-bullets li {
+            position: relative;
+            padding-left: 1.1rem;
+            padding-bottom: 0.45rem;
+            font-size: 1rem;
+            line-height: 1.65;
+            opacity: 0.85;
+        }
+        .exp-bullets li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            opacity: 0.5;
+        }
+        @media (max-width: 600px) {
+            .exp-header { flex-direction: column; }
+            .exp-meta { text-align: left; }
+        }
+
+        /* ── Skills + Interests two-column grid ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 700px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+        .about-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.5rem 1.75rem;
+        }
+        .about-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            padding-left: 0.75rem;
+            border-left: 3px solid rgba(255,255,255,0.3);
+        }
+        .about-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .about-card ul li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.6rem;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-radius: 6px;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+        .about-card ul li:hover {
+            background: linear-gradient(90deg, #ff8a00, #e233ff, #00aeff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateX(6px);
+        }
+        .about-card ul li .tab-icon { margin-right: 0; }
+        .about-card ul li:last-child { border-bottom: none; }
+
+        /* ── Tech Stack ── */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .tech-group {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+        }
+        .tech-group-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.4;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+        .tech-group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .tech-group ul li {
+            font-size: 0.92rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(255,255,255,0.06);
+            border-radius: 6px;
+            opacity: 0.85;
+        }
+
+        /* ── Tag pills (Currently Learning) ── */
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .tag {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 0.3rem 0.85rem;
+            font-size: 1rem;
+        }
+
+        /* ── Hobby tags (Beyond Coding) — warmer tint ── */
+        .tag-hobby {
+            background: rgba(255,138,0,0.1);
+            border: 1px solid rgba(255,138,0,0.2);
+            border-radius: 20px;
+            padding: 0.3rem 0.85rem;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* ── Connect topics ── */
+        .connect-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 2rem 0;
+        }
     </style>
 </head>
 
@@ -224,115 +326,25 @@
     <header>
         <a href="./index.html" class="logo">Shashank Satish Adsule</a>
 
-        <!-- navigation bar start -->
         <nav class="navbar">
             <a href="./index.html">Home</a>
             <a href="./AboutMe.html" class="active">About</a>
             <a href="./highlights.html">Highlights</a>
             <a href="./contact.html">Contact</a>
         </nav>
-        <!-- navigation bar end -->
     </header>
 
     <main>
 
-        <!-- ── About Me ── -->
+        <!-- ── Hero ── -->
         <section class="about-hero">
             <h2>My Journey</h2>
             <p class="subtitle">M.Tech · Data Science &amp; AI · IIT Madras</p>
-
             <p>I'm a Computer Science Engineer currently pursuing an M.Tech in Data Science and Artificial Intelligence at IIT Madras. I enjoy building intelligent systems that solve real-world problems, with a primary interest in Computer Vision, Deep Learning, and Artificial Intelligence.</p>
-
             <p>My journey into AI started with image processing and machine learning projects, and gradually evolved into developing deep learning models for vision applications. I enjoy understanding not only how a model works but also <em>why</em> it works — by exploring the underlying mathematics, optimization techniques, and implementation details.</p>
         </section>
 
-        <!-- ── What I Do + Areas of Interest ── -->
-        <div class="about-grid">
-            <div class="about-card">
-                <h3>What I Do</h3>
-                <ul>
-                    <li><img class="tab-icon" src="./images/icons/computer-vision.svg" alt="">Computer Vision</li>
-                    <li><img class="tab-icon" src="./images/icons/neural-net.svg" alt="">Deep Learning</li>
-                    <li><img class="tab-icon" src="./images/icons/machine-learning.svg" alt="">Machine Learning</li>
-                    <li><img class="tab-icon" src="./images/icons/image-processing.svg" alt="">Image Processing</li>
-                    <li><img class="tab-icon" src="./images/icons/codeing.svg" alt="">Competetive Programming</li>
-                    <li><img class="tab-icon" src="./images/icons/linux.svg" alt="">Linux Development</li>
-                    <li>Model Optimization for Edge Devices</li>
-                </ul>
-            </div>
-
-            <div class="about-card">
-                <h3>My Areas of Interest</h3>
-                <ul>
-                    <li><img class="tab-icon" src="./images/icons/computer-vision.svg" alt="">Computer Vision</li>
-                    <li><img class="tab-icon" src="./images/icons/image-processing.svg" alt="">Image Processing</li>
-                    <li><img class="tab-icon" src="./images/icons/neural-net.svg" alt="">Deep Learning</li>
-                    <li>Large Language Models (LLMs)</li>
-                    <li>Natural Language Processing (NLP)</li>
-                    <li>Generative AI</li>
-                    <li>Edge AI &amp; Model Deployment</li>
-                </ul>
-            </div>
-        </div>
-
-
-
-        <!-- ── Experience ── -->
-        <section class="about-section">
-            <h3>Experience</h3>
-            <p>During my internship as a <strong>Research Associate Intern at Mantra Softech India Pvt. Ltd.</strong>, I worked on deploying and evaluating computer vision models for edge hardware. My work involved experimenting with modern object detection and face detection architectures, integrating AI models on specialized hardware, and improving inference workflows.</p>
-        </section>
-
-
-        <!-- ── Currently Learning ── -->
-        <section class="about-section">
-            <h3>Currently Learning</h3>
-            <p>I'm continuously expanding my knowledge in modern AI technologies, especially:</p>
-            <div class="tag-list">
-                <span class="tag">Large Language Models</span>
-                <span class="tag">RAG</span>
-                <span class="tag">AI Agents</span>
-                <span class="tag">LangChain &amp; LangGraph</span>
-                <span class="tag">DSPy</span>
-                <span class="tag">Advanced Computer Vision</span>
-                <span class="tag">Model Compression</span>
-                <span class="tag">Efficient Inference</span>
-            </div>
-            <p style="margin-top:1rem;">I enjoy implementing research papers from scratch to better understand the ideas behind them.</p>
-        </section>
-
-
-
-        <!-- ── Beyond Coding ── -->
-        <section class="about-section">
-            <h3>Beyond Coding</h3>
-            <p>Outside of programming, I enjoy:</p>
-            <div class="tag-list">
-                <span class="tag">Reading research papers</span>
-                <span class="tag">DSA problems</span>
-                <span class="tag">Building side projects</span>
-                <span class="tag">Learning new tech</span>
-                <span class="tag">Indian flute</span>
-            </div>
-            <p style="margin-top:1rem;">I believe the best way to learn is by building, experimenting, and continuously improving.</p>
-        </section>
-
-
-
-        <!-- ── Let's Connect ── -->
-        <section class="about-section">
-            <h3>Let's Connect</h3>
-            <p>I'm always interested in discussing:</p>
-            <div class="connect-topics">
-                <span class="tag">Artificial Intelligence</span>
-                <span class="tag">Computer Vision</span>
-                <span class="tag">Open Source</span>
-                <span class="tag">Research Projects</span>
-                <span class="tag">Deep Learning</span>
-                <span class="tag">Software Engineering</span>
-            </div>
-            <p style="margin-top:1rem;">Feel free to explore my projects, and if something interests you, don't hesitate to reach out.</p>
-        </section>
+        <hr class="divider">
 
         <!-- ── Education ── -->
         <section class="about-section">
@@ -397,9 +409,182 @@
             </div>
         </section>
 
+        <hr class="divider">
+
+        <!-- ── Experience ── -->
+        <section class="about-section">
+            <h3>Experience</h3>
+            <div class="exp-stack">
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-role">GenAI Intern</span>
+                            <span class="exp-company">Marvell Semiconductors</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-duration">2025 – present</span>
+                            <span class="exp-location">Bengaluru</span>
+                        </div>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Built an end-to-end Agentic AI platform with multi-agent workflows (LangGraph) and RAG-enabled LLM pipelines (LangChain) for AI Discovery and Smart Fill.</li>
+                        <li>Integrated AI services with Databricks, backend APIs, and databases; implemented REST APIs for deploying production-ready GenAI features.</li>
+                        <li>Used LangSmith for observability, tracing, and evaluation; optimized performance through prompt engineering and context management.</li>
+                    </ul>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-role">Research Associate Intern</span>
+                            <span class="exp-company">Mantra Softech India Pvt. Ltd.</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-duration">Dec 2023 – Jun 2024</span>
+                            <span class="exp-location">Bengaluru</span>
+                        </div>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Deployed and evaluated computer vision models for edge hardware, focusing on real-time inference performance.</li>
+                        <li>Experimented with modern object detection and face detection architectures to benchmark accuracy and speed on constrained devices.</li>
+                        <li>Integrated AI models on specialized hardware and streamlined inference workflows to reduce latency.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Technical Skills + Research Interests ── -->
+        <section class="about-section">
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Technical Skills</h3>
+                    <ul>
+                        <li><img class="tab-icon" src="./images/icons/computer-vision.svg" alt="">Computer Vision</li>
+                        <li><img class="tab-icon" src="./images/icons/neural-net.svg" alt="">Deep Learning</li>
+                        <li><img class="tab-icon" src="./images/icons/machine-learning.svg" alt="">Machine Learning</li>
+                        <li><img class="tab-icon" src="./images/icons/image-processing.svg" alt="">Image Processing</li>
+                        <li><img class="tab-icon" src="./images/icons/codeing.svg" alt="">Competitive Programming</li>
+                        <li><img class="tab-icon" src="./images/icons/linux.svg" alt="">Linux Development</li>
+                        <li><img class="tab-icon" src="./images/icons/bolt.svg" alt="">Model Optimization for Edge Devices</li>
+                    </ul>
+                </div>
+
+                <div class="about-card">
+                    <h3>Research Interests</h3>
+                    <ul>
+                        <li>Large Language Models (LLMs)</li>
+                        <li>Natural Language Processing (NLP)</li>
+                        <li>Generative AI</li>
+                        <li>Edge AI &amp; Model Deployment</li>
+                        <li>Efficient Inference &amp; Model Compression</li>
+                        <li>AI Agents &amp; RAG Systems</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Tech Stack ── -->
+        <section class="about-section">
+            <h3>Tech Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-group">
+                    <span class="tech-group-label">Languages</span>
+                    <ul>
+                        <li>Python</li>
+                        <li>C++</li>
+                        <li>C</li>
+                    </ul>
+                </div>
+                <div class="tech-group">
+                    <span class="tech-group-label">Frameworks</span>
+                    <ul>
+                        <li>PyTorch</li>
+                        <li>TensorFlow</li>
+                        <li>OpenCV</li>
+                        <li>scikit-learn</li>
+                    </ul>
+                </div>
+                <div class="tech-group">
+                    <span class="tech-group-label">AI / ML</span>
+                    <ul>
+                        <li>HuggingFace</li>
+                        <li>LangChain</li>
+                        <li>ONNX</li>
+                        <li>NumPy</li>
+                    </ul>
+                </div>
+                <div class="tech-group">
+                    <span class="tech-group-label">Tools</span>
+                    <ul>
+                        <li>Git</li>
+                        <li>Linux</li>
+                        <li>Docker</li>
+                        <li>Jupyter</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Currently Learning ── -->
+        <section class="about-section">
+            <h3>Currently Learning</h3>
+            <p>Continuously expanding my knowledge in modern AI technologies, especially:</p>
+            <div class="tag-list">
+                <span class="tag">Large Language Models</span>
+                <span class="tag">RAG</span>
+                <span class="tag">AI Agents</span>
+                <span class="tag">LangChain &amp; LangGraph</span>
+                <span class="tag">DSPy</span>
+                <span class="tag">Advanced Computer Vision</span>
+                <span class="tag">Model Compression</span>
+                <span class="tag">Efficient Inference</span>
+            </div>
+            <p style="margin-top:1rem;">I enjoy implementing research papers from scratch to better understand the ideas behind them.</p>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Beyond Coding ── -->
+        <section class="about-section">
+            <h3>Beyond Coding</h3>
+            <p>Outside of programming, I enjoy:</p>
+            <div class="tag-list">
+                <span class="tag-hobby">📄 Reading research papers</span>
+                <span class="tag-hobby">🧩 DSA problems</span>
+                <span class="tag-hobby">🔨 Building side projects</span>
+                <span class="tag-hobby">🚀 Learning new tech</span>
+                <span class="tag-hobby">🎵 Indian flute</span>
+            </div>
+            <p style="margin-top:1rem;">I believe the best way to learn is by building, experimenting, and continuously improving.</p>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Let's Connect ── -->
+        <section class="about-section">
+            <h3>Let's Connect</h3>
+            <p>I'm always interested in discussing:</p>
+            <div class="connect-topics">
+                <span class="tag">Artificial Intelligence</span>
+                <span class="tag">Computer Vision</span>
+                <span class="tag">Open Source</span>
+                <span class="tag">Research Projects</span>
+                <span class="tag">Deep Learning</span>
+                <span class="tag">Software Engineering</span>
+            </div>
+            <p style="margin-top:1rem;">Feel free to explore my projects, and if something interests you, don't hesitate to reach out.</p>
+        </section>
+
     </main>
 
-    <!-- javascript -->
     <script src="./js/script.js"></script>
 
 </body>
