@@ -57,6 +57,24 @@
             -webkit-mask: url("./images/icons/Project.svg") center / contain no-repeat;
             mask: url("./images/icons/Project.svg") center / contain no-repeat;
         }
+        .hl-tab[data-tab="awards"]::before {
+            content: "";
+            width: var(--tab-icon-size, 20px);
+            height: var(--tab-icon-size, 20px);
+            flex: 0 0 auto;
+            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
+            -webkit-mask: url("./images/icons/certificate.svg") center / contain no-repeat;
+            mask: url("./images/icons/certificate.svg") center / contain no-repeat;
+        }
+        .hl-tab[data-tab="achievements"]::before {
+            content: "";
+            width: var(--tab-icon-size, 20px);
+            height: var(--tab-icon-size, 20px);
+            flex: 0 0 auto;
+            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
+            -webkit-mask: url("./images/icons/medal.svg") center / contain no-repeat;
+            mask: url("./images/icons/medal.svg") center / contain no-repeat;
+        }
         .hl-tab:hover { color: rgba(255,255,255,0.75); }
         .hl-tab.active {
             color: #fff;
@@ -67,33 +85,126 @@
         .hl-panel { display: none; }
         .hl-panel.active { display: block; }
 
-        /* ── Award cards ── */
-        .award-grid {
+        /* ── Certificate grid ── */
+        .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.1rem;
         }
-        .award-card {
+        .cert-card {
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.09);
             border-radius: 12px;
-            padding: 1.25rem 1.4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            transition: border-color 0.2s;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
         }
-        .award-card:hover { border-color: rgba(255,255,255,0.2); }
-        .award-icon { font-size: 1.6rem; }
-        .award-title {
-            font-size: 0.97rem;
+        .cert-card:hover {
+            border-color: aqua;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,255,255,0.12);
+        }
+        .cert-thumb {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            background: rgba(255,255,255,0.06);
+        }
+        /* Placeholder when no image is set */
+        .cert-thumb-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            background: rgba(255,255,255,0.05);
+        }
+        .cert-info {
+            padding: 0.75rem 1rem 0.9rem;
+        }
+        .cert-title {
+            font-size: 0.9rem;
             font-weight: 600;
             color: #fff;
+            margin-bottom: 0.2rem;
         }
-        .award-sub {
-            font-size: 0.83rem;
+        .cert-sub {
+            font-size: 0.78rem;
             color: rgba(255,255,255,0.45);
         }
+
+        /* ── Lightbox ── */
+        .cert-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.82);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+        .cert-lightbox.open { display: flex; }
+        .cert-lb-box {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            width: min(780px, 92vw);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+            animation: lbIn 0.22s ease;
+        }
+        @keyframes lbIn {
+            from { opacity: 0; transform: scale(0.93); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        .cert-lb-img-wrap {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+        }
+        .cert-lb-img-wrap img {
+            width: 100%;
+            max-height: 62vh;
+            object-fit: contain;
+            display: block;
+        }
+        .cert-lb-img-wrap .cert-lb-placeholder {
+            font-size: 5rem;
+            padding: 3rem;
+            opacity: 0.4;
+        }
+        .cert-lb-footer {
+            padding: 0.85rem 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .cert-lb-footer-text { display: flex; flex-direction: column; gap: 0.15rem; }
+        .cert-lb-name { font-size: 1rem; font-weight: 600; color: #fff; }
+        .cert-lb-issuer { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+        .cert-lb-close {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            border-radius: 7px;
+            padding: 0.38rem 0.9rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.15s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .cert-lb-close:hover { background: rgba(255,255,255,0.14); }
 
         /* ── Achievement timeline ── */
         .ach-list {
@@ -147,8 +258,8 @@
         <!-- Tab bar -->
         <div class="hl-tabs">
             <button class="hl-tab active" data-tab="projects">Projects</button>
-            <button class="hl-tab" data-tab="awards">🎖️ Awards</button>
-            <button class="hl-tab" data-tab="achievements">🏅 Achievements</button>
+            <button class="hl-tab" data-tab="awards">Certificates</button>
+            <button class="hl-tab" data-tab="achievements">Achievements</button>
         </div>
 
         <!-- ── Projects panel ── -->
@@ -254,41 +365,77 @@
         <!-- ── Awards panel ── -->
         <div class="hl-panel" id="tab-awards">
             <p class="hl-section-heading">Certifications</p>
-            <div class="award-grid">
-                <div class="award-card">
-                    <span class="award-icon">📜</span>
-                    <span class="award-title">C Intermediate</span>
-                    <span class="award-sub">Sololearn</span>
+            <div class="cert-grid">
+
+                <div class="cert-card" data-title="C Intermediate" data-issuer="Sololearn" data-img="">
+                    <div class="cert-thumb-placeholder">📜</div>
+                    <div class="cert-info">
+                        <div class="cert-title">C Intermediate</div>
+                        <div class="cert-sub">Sololearn</div>
+                    </div>
                 </div>
-                <div class="award-card">
-                    <span class="award-icon">📜</span>
-                    <span class="award-title">C++ Intermediate</span>
-                    <span class="award-sub">Sololearn</span>
+
+                <div class="cert-card" data-title="C++ Intermediate" data-issuer="Sololearn" data-img="">
+                    <div class="cert-thumb-placeholder">📜</div>
+                    <div class="cert-info">
+                        <div class="cert-title">C++ Intermediate</div>
+                        <div class="cert-sub">Sololearn</div>
+                    </div>
                 </div>
-                <div class="award-card">
-                    <span class="award-icon">📜</span>
-                    <span class="award-title">Java</span>
-                    <span class="award-sub">HackerRank</span>
+
+                <div class="cert-card" data-title="Java" data-issuer="HackerRank" data-img="">
+                    <div class="cert-thumb-placeholder">📜</div>
+                    <div class="cert-info">
+                        <div class="cert-title">Java</div>
+                        <div class="cert-sub">HackerRank</div>
+                    </div>
                 </div>
-                <div class="award-card">
-                    <span class="award-icon">📜</span>
-                    <span class="award-title">Scientific Computing with Python</span>
-                    <span class="award-sub">freeCodeCamp</span>
+
+                <div class="cert-card" data-title="Scientific Computing with Python" data-issuer="freeCodeCamp" data-img="">
+                    <div class="cert-thumb-placeholder">📜</div>
+                    <div class="cert-info">
+                        <div class="cert-title">Scientific Computing with Python</div>
+                        <div class="cert-sub">freeCodeCamp</div>
+                    </div>
                 </div>
-                <div class="award-card">
-                    <span class="award-icon">📜</span>
-                    <span class="award-title">SQL</span>
-                    <span class="award-sub">HackerRank</span>
+
+                <div class="cert-card" data-title="SQL" data-issuer="HackerRank" data-img="">
+                    <div class="cert-thumb-placeholder">📜</div>
+                    <div class="cert-info">
+                        <div class="cert-title">SQL</div>
+                        <div class="cert-sub">HackerRank</div>
+                    </div>
                 </div>
-                <div class="award-card">
-                    <span class="award-icon">🧩</span>
-                    <span class="award-title">Problem Solving</span>
-                    <span class="award-sub">HackerRank</span>
+
+                <div class="cert-card" data-title="Problem Solving" data-issuer="HackerRank" data-img="">
+                    <div class="cert-thumb-placeholder">🧩</div>
+                    <div class="cert-info">
+                        <div class="cert-title">Problem Solving</div>
+                        <div class="cert-sub">HackerRank</div>
+                    </div>
                 </div>
-                <div class="award-card">
-                    <span class="award-icon">👁️</span>
-                    <span class="award-title">OpenCV Bootcamp</span>
-                    <span class="award-sub">OpenCV University</span>
+
+                <div class="cert-card" data-title="OpenCV Bootcamp" data-issuer="OpenCV University" data-img="">
+                    <div class="cert-thumb-placeholder">👁️</div>
+                    <div class="cert-info">
+                        <div class="cert-title">OpenCV Bootcamp</div>
+                        <div class="cert-sub">OpenCV University</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── Certificate Lightbox ── -->
+        <div class="cert-lightbox" id="certLightbox">
+            <div class="cert-lb-box">
+                <div class="cert-lb-img-wrap" id="certLbImgWrap"></div>
+                <div class="cert-lb-footer">
+                    <div class="cert-lb-footer-text">
+                        <span class="cert-lb-name" id="certLbName"></span>
+                        <span class="cert-lb-issuer" id="certLbIssuer"></span>
+                    </div>
+                    <button class="cert-lb-close" id="certLbClose">✕ Close</button>
                 </div>
             </div>
         </div>
@@ -327,6 +474,55 @@
                 });
                 if (!wasOpen) item.classList.add('open');
             });
+        });
+
+        // Certificate lightbox
+        var lb = document.getElementById('certLightbox');
+        var lbImgWrap = document.getElementById('certLbImgWrap');
+        var lbName = document.getElementById('certLbName');
+        var lbIssuer = document.getElementById('certLbIssuer');
+        var lbClose = document.getElementById('certLbClose');
+
+        document.querySelectorAll('.cert-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var title = card.dataset.title;
+                var issuer = card.dataset.issuer;
+                var img = card.dataset.img;
+
+                lbName.textContent = title;
+                lbIssuer.textContent = issuer;
+                lbImgWrap.innerHTML = '';
+
+                if (img) {
+                    var el = document.createElement('img');
+                    el.src = img;
+                    el.alt = title;
+                    lbImgWrap.appendChild(el);
+                } else {
+                    // Show placeholder emoji when no image path is set
+                    var placeholder = card.querySelector('.cert-thumb-placeholder, .cert-thumb');
+                    var emoji = placeholder && placeholder.textContent ? placeholder.textContent.trim() : '📜';
+                    var div = document.createElement('div');
+                    div.className = 'cert-lb-placeholder';
+                    div.textContent = emoji;
+                    lbImgWrap.appendChild(div);
+                }
+
+                lb.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        lbClose.addEventListener('click', closeLightbox);
+        lb.addEventListener('click', function(e) {
+            if (e.target === lb) closeLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
         });
 
         // Tabs

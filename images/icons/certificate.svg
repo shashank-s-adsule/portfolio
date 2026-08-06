@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Awards</title>
+  <desc id="desc">A certificate representing awards and achievements.</desc>
+
+  <!-- Certificate -->
+  <rect x="3" y="4" width="18" height="14" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" rx="1"/>
+
+  <!-- Top border decoration -->
+  <line x1="5" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5"/>
+
+  <!-- Seal circle -->
+  <circle cx="12" cy="14" r="1.5" stroke="currentColor" stroke-width="1.2" fill="currentColor" opacity=".7"/>
+
+  <!-- Lines (text representation) -->
+  <line x1="5" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="1"/>
+  <line x1="5" y1="11" x2="18" y2="11" stroke="currentColor" stroke-width="1"/>
+
+</svg>
