@@ -12,314 +12,6 @@
     <link rel="stylesheet" type="text/css" href=".\css\style.css">
 
     <title>Shashank Satish Adsule</title>
-
-    <style>
-        /* ── About hero ── */
-        .about-hero {
-            padding: 3rem 0 1.5rem;
-        }
-        .about-hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 0.4rem;
-        }
-        .about-hero .subtitle {
-            font-size: 1.15rem;
-            opacity: 0.65;
-            margin-bottom: 1.4rem;
-        }
-        .about-hero p {
-            max-width: 720px;
-            line-height: 1.75;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        /* ── Section wrapper ── */
-        .about-section {
-            margin: 2.5rem 0;
-        }
-        .about-section h3 {
-            font-size: 1.45rem;
-            margin-bottom: 1rem;
-            padding-left: 0.75rem;
-            border-left: 3px solid rgba(255,255,255,0.3);
-        }
-        .about-section p {
-            line-height: 1.75;
-            max-width: 720px;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        /* ── Education timeline ── */
-        .edu-list {
-            border-left: 2px solid rgba(255,255,255,0.12);
-            margin-left: 0.5rem;
-            padding-left: 1.5rem;
-        }
-        .edu-item {
-            position: relative;
-            padding-bottom: 1.75rem;
-        }
-        .edu-item::before {
-            content: '';
-            position: absolute;
-            left: -1.75rem;
-            top: 0.45rem;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.35);
-            border: 2px solid rgba(255,255,255,0.6);
-        }
-        .edu-item-last { padding-bottom: 0.25rem; }
-        .edu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        .edu-degree {
-            display: block;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-        .edu-grade {
-            font-size: 0.9rem;
-            font-weight: 400;
-            opacity: 0.6;
-        }
-        .edu-school {
-            display: block;
-            font-size: 0.97rem;
-            opacity: 0.75;
-            margin-bottom: 0.2rem;
-        }
-        .edu-courses {
-            display: block;
-            font-size: 0.85rem;
-            opacity: 0.45;
-            font-style: italic;
-        }
-        .edu-meta {
-            text-align: right;
-            flex-shrink: 0;
-        }
-        .edu-location {
-            display: block;
-            font-size: 0.9rem;
-            opacity: 0.55;
-        }
-        .edu-year {
-            display: block;
-            font-size: 0.85rem;
-            opacity: 0.4;
-            margin-top: 0.15rem;
-        }
-        @media (max-width: 600px) {
-            .edu-header { flex-direction: column; }
-            .edu-meta { text-align: left; }
-        }
-
-        /* ── Experience card ── */
-        .exp-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-        .exp-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 1.5rem 1.75rem;
-            max-width: 780px;
-        }
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        .exp-role {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-        .exp-company {
-            display: block;
-            font-size: 0.97rem;
-            opacity: 0.7;
-        }
-        .exp-meta {
-            text-align: right;
-            flex-shrink: 0;
-        }
-        .exp-duration {
-            display: block;
-            font-size: 0.9rem;
-            opacity: 0.55;
-        }
-        .exp-location {
-            display: block;
-            font-size: 0.85rem;
-            opacity: 0.4;
-            margin-top: 0.15rem;
-        }
-        .exp-bullets {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .exp-bullets li {
-            position: relative;
-            padding-left: 1.1rem;
-            padding-bottom: 0.45rem;
-            font-size: 1rem;
-            line-height: 1.65;
-            opacity: 0.85;
-        }
-        .exp-bullets li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            opacity: 0.5;
-        }
-        @media (max-width: 600px) {
-            .exp-header { flex-direction: column; }
-            .exp-meta { text-align: left; }
-        }
-
-        /* ── Skills + Interests two-column grid ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        @media (max-width: 700px) {
-            .about-grid { grid-template-columns: 1fr; }
-        }
-        .about-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 1.5rem 1.75rem;
-        }
-        .about-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 1rem;
-            padding-left: 0.75rem;
-            border-left: 3px solid rgba(255,255,255,0.3);
-        }
-        .about-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .about-card ul li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.45rem 0.6rem;
-            font-size: 1.05rem;
-            line-height: 1.5;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            border-radius: 6px;
-            transition: color 0.25s ease, transform 0.25s ease;
-        }
-        .about-card ul li:hover {
-            background: linear-gradient(90deg, #ff8a00, #e233ff, #00aeff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transform: translateX(6px);
-        }
-        .about-card ul li .tab-icon { margin-right: 0; }
-        .about-card ul li:last-child { border-bottom: none; }
-
-        /* ── Tech Stack ── */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-        .tech-group {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
-        }
-        .tech-group-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            opacity: 0.4;
-            margin-bottom: 0.6rem;
-            display: block;
-        }
-        .tech-group ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-        .tech-group ul li {
-            font-size: 0.92rem;
-            padding: 0.2rem 0.6rem;
-            background: rgba(255,255,255,0.06);
-            border-radius: 6px;
-            opacity: 0.85;
-        }
-
-        /* ── Tag pills (Currently Learning) ── */
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-        .tag {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 20px;
-            padding: 0.3rem 0.85rem;
-            font-size: 1rem;
-        }
-
-        /* ── Hobby tags (Beyond Coding) — warmer tint ── */
-        .tag-hobby {
-            background: rgba(255,138,0,0.1);
-            border: 1px solid rgba(255,138,0,0.2);
-            border-radius: 20px;
-            padding: 0.3rem 0.85rem;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        /* ── Connect topics ── */
-        .connect-topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .divider {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            margin: 2rem 0;
-        }
-    </style>
 </head>
 
 <body>
@@ -417,14 +109,21 @@
             <div class="exp-stack">
 
                 <div class="exp-card">
-                    <div class="exp-header">
-                        <div>
-                            <span class="exp-role">GenAI Intern</span>
-                            <span class="exp-company">Marvell Semiconductors</span>
+                    <div class="exp-card-top">
+                        <div class="exp-logo">
+                            <img src="./images/icons/Marvell-semiconductors.svg" alt="Marvell Semiconductors">
                         </div>
-                        <div class="exp-meta">
-                            <span class="exp-duration">2025 – present</span>
-                            <span class="exp-location">Bengaluru</span>
+                        <div class="exp-content">
+                            <div class="exp-header">
+                                <div>
+                                    <span class="exp-role">GenAI Intern</span>
+                                    <span class="exp-company">Marvell Semiconductors</span>
+                                </div>
+                                <div class="exp-meta">
+                                    <span class="exp-duration">2025 – present</span>
+                                    <span class="exp-location">Bengaluru</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <ul class="exp-bullets">
@@ -435,14 +134,21 @@
                 </div>
 
                 <div class="exp-card">
-                    <div class="exp-header">
-                        <div>
-                            <span class="exp-role">Research Associate Intern</span>
-                            <span class="exp-company">Mantra Softech India Pvt. Ltd.</span>
+                    <div class="exp-card-top">
+                        <div class="exp-logo">
+                            <img src="./images/icons/mantra-softech.svg" alt="Mantra Softech">
                         </div>
-                        <div class="exp-meta">
-                            <span class="exp-duration">Dec 2023 – Jun 2024</span>
-                            <span class="exp-location">Bengaluru</span>
+                        <div class="exp-content">
+                            <div class="exp-header">
+                                <div>
+                                    <span class="exp-role">Research Associate Intern</span>
+                                    <span class="exp-company">Mantra Softech India Pvt. Ltd.</span>
+                                </div>
+                                <div class="exp-meta">
+                                    <span class="exp-duration">Dec 2023 – Jun 2024</span>
+                                    <span class="exp-location">Bengaluru</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <ul class="exp-bullets">

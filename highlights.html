@@ -26,230 +26,6 @@
         </nav>
     </header>
 
-    <style>
-        /* ── Tab navigation ── */
-        .hl-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-        .hl-tab {
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            color: rgba(255,255,255,0.45);
-            font-size: 0.95rem;
-            padding: 0.6rem 1rem 0.75rem;
-            cursor: pointer;
-            transition: color 0.2s, border-color 0.2s;
-            margin-bottom: -1px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-        .hl-tab[data-tab="projects"]::before {
-            content: "";
-            width: var(--tab-icon-size, 20px);
-            height: var(--tab-icon-size, 20px);
-            flex: 0 0 auto;
-            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
-            -webkit-mask: url("./images/icons/Project.svg") center / contain no-repeat;
-            mask: url("./images/icons/Project.svg") center / contain no-repeat;
-        }
-        .hl-tab[data-tab="awards"]::before {
-            content: "";
-            width: var(--tab-icon-size, 20px);
-            height: var(--tab-icon-size, 20px);
-            flex: 0 0 auto;
-            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
-            -webkit-mask: url("./images/icons/certificate.svg") center / contain no-repeat;
-            mask: url("./images/icons/certificate.svg") center / contain no-repeat;
-        }
-        .hl-tab[data-tab="achievements"]::before {
-            content: "";
-            width: var(--tab-icon-size, 20px);
-            height: var(--tab-icon-size, 20px);
-            flex: 0 0 auto;
-            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
-            -webkit-mask: url("./images/icons/medal.svg") center / contain no-repeat;
-            mask: url("./images/icons/medal.svg") center / contain no-repeat;
-        }
-        .hl-tab:hover { color: rgba(255,255,255,0.75); }
-        .hl-tab.active {
-            color: #fff;
-            border-bottom-color: aqua;
-        }
-
-        /* ── Tab panels ── */
-        .hl-panel { display: none; }
-        .hl-panel.active { display: block; }
-
-        /* ── Certificate grid ── */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.1rem;
-        }
-        .cert-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.09);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-        }
-        .cert-card:hover {
-            border-color: aqua;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,255,255,0.12);
-        }
-        .cert-thumb {
-            width: 100%;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            display: block;
-            background: rgba(255,255,255,0.06);
-        }
-        /* Placeholder when no image is set */
-        .cert-thumb-placeholder {
-            width: 100%;
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            background: rgba(255,255,255,0.05);
-        }
-        .cert-info {
-            padding: 0.75rem 1rem 0.9rem;
-        }
-        .cert-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-        .cert-sub {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.45);
-        }
-
-        /* ── Lightbox ── */
-        .cert-lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(0,0,0,0.82);
-            backdrop-filter: blur(6px);
-            align-items: center;
-            justify-content: center;
-        }
-        .cert-lightbox.open { display: flex; }
-        .cert-lb-box {
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 14px;
-            width: min(780px, 92vw);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.7);
-            animation: lbIn 0.22s ease;
-        }
-        @keyframes lbIn {
-            from { opacity: 0; transform: scale(0.93); }
-            to   { opacity: 1; transform: scale(1); }
-        }
-        .cert-lb-img-wrap {
-            width: 100%;
-            background: rgba(255,255,255,0.03);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 260px;
-        }
-        .cert-lb-img-wrap img {
-            width: 100%;
-            max-height: 62vh;
-            object-fit: contain;
-            display: block;
-        }
-        .cert-lb-img-wrap .cert-lb-placeholder {
-            font-size: 5rem;
-            padding: 3rem;
-            opacity: 0.4;
-        }
-        .cert-lb-footer {
-            padding: 0.85rem 1.2rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        .cert-lb-footer-text { display: flex; flex-direction: column; gap: 0.15rem; }
-        .cert-lb-name { font-size: 1rem; font-weight: 600; color: #fff; }
-        .cert-lb-issuer { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
-        .cert-lb-close {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #fff;
-            border-radius: 7px;
-            padding: 0.38rem 0.9rem;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: background 0.15s;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .cert-lb-close:hover { background: rgba(255,255,255,0.14); }
-
-        /* ── Achievement timeline ── */
-        .ach-list {
-            border-left: 2px solid rgba(255,255,255,0.1);
-            margin-left: 0.5rem;
-        }
-        .ach-item {
-            position: relative;
-            padding: 0 0 1.5rem 1.5rem;
-        }
-        .ach-item::before {
-            content: '';
-            position: absolute;
-            left: -0.65rem;
-            top: 0.4rem;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: aqua;
-            opacity: 0.7;
-        }
-        .ach-item:last-child { padding-bottom: 0; }
-        .ach-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-        .ach-detail {
-            font-size: 0.88rem;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .hl-section-heading {
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.3);
-            margin: 1.5rem 0 0.75rem;
-        }
-
-        main { min-height: unset; margin-top: 0; }
-    </style>
-
     <main>
         <div class="mainhead">
             <h1>Highlights</h1>
@@ -367,56 +143,56 @@
             <p class="hl-section-heading">Certifications</p>
             <div class="cert-grid">
 
-                <div class="cert-card" data-title="C Intermediate" data-issuer="Sololearn" data-img="">
-                    <div class="cert-thumb-placeholder">📜</div>
+                <div class="cert-card" data-title="C Intermediate" data-issuer="Sololearn" data-img="./images/certificates/C_sololern.webp">
+                    <img class="cert-thumb" src="./images/certificates/C_sololern.webp" alt="C Intermediate">
                     <div class="cert-info">
                         <div class="cert-title">C Intermediate</div>
                         <div class="cert-sub">Sololearn</div>
                     </div>
                 </div>
 
-                <div class="cert-card" data-title="C++ Intermediate" data-issuer="Sololearn" data-img="">
-                    <div class="cert-thumb-placeholder">📜</div>
+                <div class="cert-card" data-title="C++ Intermediate" data-issuer="Sololearn" data-img="./images/certificates/C++_sololearn.webp">
+                    <img class="cert-thumb" src="./images/certificates/C++_sololearn.webp" alt="C++ Intermediate">
                     <div class="cert-info">
                         <div class="cert-title">C++ Intermediate</div>
                         <div class="cert-sub">Sololearn</div>
                     </div>
                 </div>
 
-                <div class="cert-card" data-title="Java" data-issuer="HackerRank" data-img="">
-                    <div class="cert-thumb-placeholder">📜</div>
+                <div class="cert-card" data-title="Java" data-issuer="HackerRank" data-img="./images/certificates/java_basic.webp">
+                    <img class="cert-thumb" src="./images/certificates/java_basic.webp" alt="Java">
                     <div class="cert-info">
                         <div class="cert-title">Java</div>
                         <div class="cert-sub">HackerRank</div>
                     </div>
                 </div>
 
-                <div class="cert-card" data-title="Scientific Computing with Python" data-issuer="freeCodeCamp" data-img="">
-                    <div class="cert-thumb-placeholder">📜</div>
+                <div class="cert-card" data-title="Scientific Computing with Python" data-issuer="freeCodeCamp" data-img="./images/certificates/scpy_freecodecamp.webp">
+                    <img class="cert-thumb" src="./images/certificates/scpy_freecodecamp.webp" alt="Scientific Computing with Python">
                     <div class="cert-info">
                         <div class="cert-title">Scientific Computing with Python</div>
                         <div class="cert-sub">freeCodeCamp</div>
                     </div>
                 </div>
 
-                <div class="cert-card" data-title="SQL" data-issuer="HackerRank" data-img="">
-                    <div class="cert-thumb-placeholder">📜</div>
+                <div class="cert-card" data-title="SQL" data-issuer="HackerRank" data-img="./images/certificates/SQL.webp">
+                    <img class="cert-thumb" src="./images/certificates/SQL.webp" alt="SQL">
                     <div class="cert-info">
                         <div class="cert-title">SQL</div>
                         <div class="cert-sub">HackerRank</div>
                     </div>
                 </div>
 
-                <div class="cert-card" data-title="Problem Solving" data-issuer="HackerRank" data-img="">
-                    <div class="cert-thumb-placeholder">🧩</div>
+                <div class="cert-card" data-title="Problem Solving" data-issuer="HackerRank" data-img="./images/certificates/problem_solving_intermediate.webp">
+                    <img class="cert-thumb" src="./images/certificates/problem_solving_intermediate.webp" alt="Problem Solving">
                     <div class="cert-info">
                         <div class="cert-title">Problem Solving</div>
                         <div class="cert-sub">HackerRank</div>
                     </div>
                 </div>
 
-                <div class="cert-card" data-title="OpenCV Bootcamp" data-issuer="OpenCV University" data-img="">
-                    <div class="cert-thumb-placeholder">👁️</div>
+                <div class="cert-card" data-title="OpenCV Bootcamp" data-issuer="OpenCV University" data-img="./images/certificates/OpenCV-Bootcamp.webp">
+                    <img class="cert-thumb" src="./images/certificates/OpenCV-Bootcamp.webp" alt="OpenCV Bootcamp">
                     <div class="cert-info">
                         <div class="cert-title">OpenCV Bootcamp</div>
                         <div class="cert-sub">OpenCV University</div>
@@ -445,15 +221,15 @@
             <p class="hl-section-heading">Olympiad &amp; Academic Honours</p>
             <div class="ach-list">
                 <div class="ach-item">
-                    <div class="ach-title">🥇 National Science Olympiad — 1st rank in class</div>
+                    <div class="ach-title">National Science Olympiad — 1st rank in class</div>
                     <div class="ach-detail">Qualified in Dec 2016 &amp; Dec 2018 · 1st rank in class in 2018</div>
                 </div>
                 <div class="ach-item">
-                    <div class="ach-title">📐 International Mathematics Olympiad</div>
+                    <div class="ach-title">International Mathematics Olympiad</div>
                     <div class="ach-detail">Qualified — Jan 2017</div>
                 </div>
                 <div class="ach-item">
-                    <div class="ach-title">🔬 International Science Olympiad — 3rd rank in class</div>
+                    <div class="ach-title">International Science Olympiad — 3rd rank in class</div>
                     <div class="ach-detail">Qualified in 2015 · 3rd rank in class</div>
                 </div>
             </div>
@@ -462,79 +238,7 @@
     </main>
 
     <script src="./js/script.js"></script>
-
-    <script>
-        // Accordion
-        document.querySelectorAll('.acc-header').forEach(function(header) {
-            header.addEventListener('click', function() {
-                var item = header.closest('.acc-item');
-                var wasOpen = item.classList.contains('open');
-                document.querySelectorAll('.acc-item.open').forEach(function(el) {
-                    el.classList.remove('open');
-                });
-                if (!wasOpen) item.classList.add('open');
-            });
-        });
-
-        // Certificate lightbox
-        var lb = document.getElementById('certLightbox');
-        var lbImgWrap = document.getElementById('certLbImgWrap');
-        var lbName = document.getElementById('certLbName');
-        var lbIssuer = document.getElementById('certLbIssuer');
-        var lbClose = document.getElementById('certLbClose');
-
-        document.querySelectorAll('.cert-card').forEach(function(card) {
-            card.addEventListener('click', function() {
-                var title = card.dataset.title;
-                var issuer = card.dataset.issuer;
-                var img = card.dataset.img;
-
-                lbName.textContent = title;
-                lbIssuer.textContent = issuer;
-                lbImgWrap.innerHTML = '';
-
-                if (img) {
-                    var el = document.createElement('img');
-                    el.src = img;
-                    el.alt = title;
-                    lbImgWrap.appendChild(el);
-                } else {
-                    // Show placeholder emoji when no image path is set
-                    var placeholder = card.querySelector('.cert-thumb-placeholder, .cert-thumb');
-                    var emoji = placeholder && placeholder.textContent ? placeholder.textContent.trim() : '📜';
-                    var div = document.createElement('div');
-                    div.className = 'cert-lb-placeholder';
-                    div.textContent = emoji;
-                    lbImgWrap.appendChild(div);
-                }
-
-                lb.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        function closeLightbox() {
-            lb.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-        lbClose.addEventListener('click', closeLightbox);
-        lb.addEventListener('click', function(e) {
-            if (e.target === lb) closeLightbox();
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
-        });
-
-        // Tabs
-        document.querySelectorAll('.hl-tab').forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.hl-tab').forEach(function(t) { t.classList.remove('active'); });
-                document.querySelectorAll('.hl-panel').forEach(function(p) { p.classList.remove('active'); });
-                tab.classList.add('active');
-                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-            });
-        });
-    </script>
+    <script src="./js/highlights.js"></script>
 </body>
 
 </html>

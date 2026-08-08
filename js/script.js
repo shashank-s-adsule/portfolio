@@ -1,8 +1,3 @@
-
-// // navbar
-// document.getElementsByClassName("navbar")
-
-
 // ################################################ AUTO TYPER ##########################################
 const words = [
   { text: "Computer Engineer 💻",     color: "#f97316" },  // orange
@@ -49,10 +44,19 @@ function erase() {
 // Start typing on load3
 type();
 
-// ################################################ CARD FLIP ##########################################
-document.querySelectorAll(".card").forEach(card => {      /* ---------- Always Enable Click ---------- */
-  card.addEventListener("click", e => {
-    e.stopPropagation();
-    card.classList.toggle("is-flipped");
-  });
-});
+// ################################################ Project Accordion ##########################################
+
+
+// ################################################ Copy Email Address ##########################################
+function copyEmail() {
+    var email = document.getElementById('email-text').textContent.trim();
+    navigator.clipboard.writeText(email).then(function () {
+        var btn = document.getElementById('copy-btn');
+        btn.classList.add('copied');
+        btn.textContent = '✓ Copied';
+        setTimeout(function () {
+            btn.classList.remove('copied');
+            btn.textContent = 'Copy';
+        }, 2000);
+    });
+}

@@ -12,236 +12,6 @@
     <link rel="stylesheet" type="text/css" href=".\css\style.css">
 
     <title>Shashank Satish Adsule</title>
-
-    <style>
-        /* ── Reset global section min-height ── */
-        main section,
-        main .contact-page {
-            min-height: unset;
-            margin-top: 0;
-        }
-
-        /* ── Page container ── */
-        .contact-page {
-            padding: 2.5rem 4% 4rem;
-        }
-
-        /* ── Hero ── */
-        .contact-hero {
-            margin-bottom: 2.5rem;
-        }
-        .availability-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            background: rgba(0, 200, 120, 0.1);
-            border: 1px solid rgba(0, 200, 120, 0.25);
-            border-radius: 20px;
-            padding: 0.28rem 0.8rem;
-            font-size: 0.85rem;
-            color: #00c878;
-            margin-bottom: 0.9rem;
-        }
-        .availability-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #00c878;
-            flex-shrink: 0;
-            animation: blink 2s ease-in-out infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0.3; }
-        }
-        .contact-hero h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: #fff;
-        }
-        .contact-hero p {
-            font-size: 1rem;
-            opacity: 0.55;
-            line-height: 1.7;
-            max-width: 480px;
-        }
-
-        /* ── Two-column body ── */
-        .contact-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            align-items: start;
-        }
-        .contact-left,
-        .contact-right { min-width: 0; }
-
-        /* ── Section label ── */
-        .sec-label {
-            font-size: 0.68rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.3);
-            margin-bottom: 0.65rem;
-        }
-        .contact-section {
-            margin-bottom: 1.75rem;
-        }
-
-        /* ── Message form ── */
-        .msg-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .form-row {
-            display: flex;
-            gap: 10px;
-        }
-        .form-row input,
-        .msg-textarea {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 0.92rem;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.15s;
-        }
-        .form-row input {
-            flex: 1;
-            padding: 0.58rem 0.85rem;
-            width: 0; /* allow flex to shrink properly */
-        }
-        .form-row input::placeholder { opacity: 0.3; }
-        .form-row input:focus { outline: none; border-color: rgba(255,255,255,0.28); }
-        .msg-textarea {
-            width: 100%;
-            box-sizing: border-box;
-            min-height: 140px;
-            padding: 0.7rem 0.85rem;
-            resize: vertical;
-        }
-        .msg-textarea::placeholder { opacity: 0.3; }
-        .msg-textarea:focus { outline: none; border-color: rgba(255,255,255,0.28); }
-        .form-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            padding-top: 2px;
-        }
-        .form-note {
-            font-size: 0.75rem;
-            opacity: 0.3;
-        }
-        .send-btn {
-            background: #fff;
-            color: #111;
-            border: none;
-            border-radius: 8px;
-            padding: 0.52rem 1.25rem;
-            font-size: 0.88rem;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: background 0.15s, transform 0.1s;
-        }
-        .send-btn:hover  { background: #e2e2e2; }
-        .send-btn:active { transform: scale(0.97); }
-
-        /* ── Email row ── */
-        .email-row {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.09);
-            border-radius: 9px;
-            padding: 0.65rem 0.9rem;
-        }
-        .email-addr {
-            flex: 1;
-            font-size: 0.88rem;
-            font-family: monospace;
-            color: #fff;
-            letter-spacing: 0.01em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .copy-btn {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 6px;
-            color: rgba(255,255,255,0.55);
-            font-size: 0.78rem;
-            padding: 4px 11px;
-            cursor: pointer;
-            flex-shrink: 0;
-            font-family: 'Poppins', sans-serif;
-            transition: background 0.15s, color 0.15s;
-        }
-        .copy-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
-        .copy-btn.copied { color: #00c878; border-color: rgba(0,200,120,0.3); }
-
-        /* ── Icon grid ── */
-        .icon-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.25rem;
-        }
-        .icon-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.4rem;
-            text-decoration: none;
-            color: rgba(255,255,255,0.45);
-            font-size: 0.7rem;
-            transition: color 0.2s;
-        }
-        .icon-link:hover { color: #fff; }
-        .icon-link img {
-            width: 42px;
-            height: 42px;
-            margin: 0;
-            filter: grayscale(100%);
-            transition: filter 0.2s, transform 0.2s;
-        }
-        .icon-link:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.3);
-        }
-        .icon-link svg {
-            width: 42px;
-            height: 42px;
-            opacity: 0.4;
-            transition: opacity 0.2s, transform 0.2s;
-        }
-        .icon-link:hover svg {
-            opacity: 1;
-            transform: scale(1.3);
-        }
-
-        /* ── Divider between right sections ── */
-        .right-divider {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            margin: 1.5rem 0;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 650px) {
-            .contact-body { grid-template-columns: 1fr; gap: 0; }
-            .form-row { flex-direction: column; }
-            .form-footer { flex-direction: column; align-items: flex-start; }
-            .contact-hero h2 { font-size: 1.7rem; }
-        }
-    </style>
 </head>
 
 <body>
@@ -260,12 +30,8 @@
 
             <!-- ── Hero ── -->
             <div class="contact-hero">
-                <div class="availability-badge">
-                    <span class="availability-dot"></span>
-                    Open to research collaborations
-                </div>
                 <h2>Get in touch</h2>
-                <p>Happy to discuss AI, computer vision, open-source projects, or research ideas. I usually respond within a day or two.</p>
+                <p>Open to research collaborations. Happy to discuss AI, computer vision, open-source projects, or research ideas. I usually respond within a day or two.</p>
             </div>
 
             <!-- ── Two-column body ── -->
@@ -296,7 +62,7 @@
                         <div class="email-row">
                             <span style="opacity:0.5; font-size:1rem;">✉️</span>
                             <!-- TODO: replace with your real email -->
-                            <span class="email-addr" id="email-text">shashank.adsule@example.com</span>
+                            <span class="email-addr" id="email-text">shashank.s.adsule@gmail.com</span>
                             <button class="copy-btn" id="copy-btn" onclick="copyEmail()">Copy</button>
                         </div>
                     </div>
@@ -361,36 +127,7 @@
     </main>
 
     <script src="./js/script.js"></script>
-    <script>
-        function copyEmail() {
-            var email = document.getElementById('email-text').textContent.trim();
-            navigator.clipboard.writeText(email).then(function () {
-                var btn = document.getElementById('copy-btn');
-                btn.classList.add('copied');
-                btn.textContent = '✓ Copied';
-                setTimeout(function () {
-                    btn.classList.remove('copied');
-                    btn.textContent = 'Copy';
-                }, 2000);
-            });
-        }
-
-        function sendMail() {
-            var name    = document.getElementById('sender-name').value.trim();
-            var replyTo = document.getElementById('sender-email').value.trim();
-            var body    = document.getElementById('sender-msg').value.trim();
-            if (!body) { document.getElementById('sender-msg').focus(); return; }
-            // TODO: replace with your real email address
-            var toEmail  = 'shashank.adsule@example.com';
-            var subject  = encodeURIComponent('Message from ' + (name || 'your portfolio'));
-            var bodyText = encodeURIComponent(
-                body +
-                (replyTo ? '\n\n--\nReply to: ' + replyTo : '') +
-                (name    ? '\n' + name : '')
-            );
-            window.location.href = 'mailto:' + toEmail + '?subject=' + subject + '&body=' + bodyText;
-        }
-    </script>
+    <script src="./js/contact-page.js"></script>
 </body>
 
 </html>
