@@ -18,10 +18,18 @@
         .typer_animation span{
             position: relative;
         }
+        model-viewer {
+            width: 100%;
+            height: 50vh;
+            max-width: 350px;
+            margin: 0 auto;
+            touch-action: manipulation;
+        }
     </style>
 
 
     <title>Shashank Satish Adsule</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 
 <body>
@@ -55,11 +63,11 @@
                 <a href="#" class="CV">View Resume</a>
             </div>
 
-            <!-- images start-->
+            <!-- 3D model start-->
             <div class="home-image">
-                <img src="./images/place holder.svg" alt="image of random devloping site [to put] or self image" >
+                <model-viewer id="cube-model" src="./assets/3d models/place_holder.glb" alt="3D cube model" camera-controls></model-viewer>
             </div>
-            <!-- images end -->
+            <!-- 3D model end -->
 
         </section>
         <!--first section end-->
@@ -68,6 +76,23 @@
 
     <!-- javascript -->
     <script src="./js/script.js"></script>
+    <script>
+        const modelViewer = document.getElementById('cube-model');
+
+        // Disable zoom on scroll wheel
+        modelViewer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Auto rotation on Y-axis
+        modelViewer.addEventListener('load', () => {
+            let rotationY = 0;
+            setInterval(() => {
+                rotationY += 0.01;
+                modelViewer.model.scene.rotation.y = rotationY;
+            }, 30);
+        });
+    </script>
 
 </body>
 
