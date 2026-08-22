@@ -6,7 +6,6 @@
     --second-bg-color: #222222;
     --text-color: #fff;
     --main-color: #ff6f00e1;
-    --border-color: #444444;
 
     --header-height: 60px;
     --header-padding-x: 2.5%;
@@ -46,9 +45,8 @@ body{
     color: var(--text-color);               /*text color*/
 }
 
-/* --------------------- BODY --------------------- */
-header
-{
+/* --------------------- HEADER --------------------- */
+header {
     display: flex;
     position: fixed;
     top: 0;
@@ -56,10 +54,15 @@ header
     width: 100%;
     height: var(--header-height);
     padding: 2rem var(--header-padding-x);
-    background-color: var(--bg-color);
+    background: rgba(34, 34, 34, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 16px rgba(255, 107, 0, 0.1);
 }
 
 main{
