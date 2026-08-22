@@ -257,30 +257,49 @@
     margin-bottom: 2.5rem;
     color: #fff;
 }
-.tech-stack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+.tech-stack-carousel {
+    overflow: hidden;
+    width: 100%;
+    padding: 2rem 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.08), transparent);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.tech-carousel-track {
+    display: flex;
     gap: 1.2rem;
+    animation: scroll-carousel 60s linear infinite;
+    will-change: transform;
+    margin-right: 1.2rem;
+}
+@keyframes scroll-carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - 1.2rem));
+    }
 }
 .tech-item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    padding: 1.2rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    color: rgba(255, 255, 255, 0.8);
+    padding: 1rem 2rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
     flex-direction: column;
     text-align: center;
     font-weight: 500;
+    white-space: nowrap;
 }
 .tech-item:hover {
-    background: rgba(255, 107, 0, 0.1);
-    border-color: rgba(255, 107, 0, 0.4);
-    transform: translateY(-4px);
+    background: transparent;
+    border-color: transparent;
+    transform: scale(1.1);
     color: var(--main-color);
 }
 .tech-icon {
