@@ -268,16 +268,15 @@
 .tech-carousel-track {
     display: flex;
     gap: 1.2rem;
-    animation: scroll-carousel 60s linear infinite;
+    animation: scroll-carousel 40s linear infinite;
     will-change: transform;
-    margin-right: 1.2rem;
 }
 @keyframes scroll-carousel {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-100% - 1.2rem));
+        transform: translateX(-50%);
     }
 }
 .tech-item {
