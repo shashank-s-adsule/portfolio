@@ -259,24 +259,7 @@
     </main>
 
     <!-- javascript -->
-    <script src="./js/script.js"></script>
-    <script>
-        const modelViewer = document.getElementById('cube-model');
-
-        // Disable zoom on scroll wheel
-        modelViewer.addEventListener('wheel', (e) => {
-            e.preventDefault();
-        }, { passive: false });
-
-        // Auto rotation on Y-axis
-        modelViewer.addEventListener('load', () => {
-            let rotationY = 0;
-            setInterval(() => {
-                rotationY += 0.01;
-                modelViewer.model.scene.rotation.y = rotationY;
-            }, 30);
-        });
-    </script>
+    <script src="./js/index.js"></script>
 
 </body>
 
