@@ -19,9 +19,10 @@
             position: relative;
         }
         model-viewer {
-            width: 100%;
-            height: 50vh;
-            max-width: 350px;
+            width: 90%;
+            height: 80vh;
+            max-width: 600px;
+            max-height: 600px;
             margin: 0 auto;
             touch-action: manipulation;
         }
@@ -47,20 +48,35 @@
     </header>
 
     <main>
-        <!--first section start-->
+        <!--Hero Section start-->
         <section class="home" id="home">
             <div class="home-content">
-
                 <div class="typer_animation">
-                    <h4>Hi i am </h4>
+                    <h4>Hi, I am</h4>
                     <h2>Shashank Adsule</h2>
                     <h6>And I'm a <span id="typewriter"></span><span style="color:gold">|</span> </h6>
                 </div>
 
-                <p class="short-distription"> about my self </p>
+                <p class="short-distription">
+                    M.Tech student in Data Science & AI at IIT Madras. Passionate about building intelligent systems, Computer Vision, Deep Learning, and solving real-world problems with AI.
+                </p>
 
-                <!-- make it like popup to view only for my resume-->
-                <a href="#" class="CV">View Resume</a>
+                <div class="cta-buttons">
+                    <a href="./highlights.html" class="btn btn-primary">View Projects</a>
+                    <a href="./AboutMe.html" class="btn btn-secondary">Learn More</a>
+                    <a href="./contact.html" class="btn btn-tertiary">Get In Touch</a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/shashank-s-adsule" target="_blank" class="social-btn" title="GitHub">
+                        <img src="./assets/icons/profiles/github.svg" alt="GitHub Logo" class="social-icon">
+                        GitHub
+                    </a>
+                    <a href="https://leetcode.com/u/shashank-adsule/" target="_blank" class="social-btn" title="LeetCode">
+                        <img src="./assets/icons/profiles/leetcode.svg" alt="LeetCode Logo" class="social-icon">
+                        LeetCode
+                    </a>
+                </div>
             </div>
 
             <!-- 3D model start-->
@@ -68,9 +84,114 @@
                 <model-viewer id="cube-model" src="./assets/3d models/place_holder.glb" alt="3D cube model" camera-controls></model-viewer>
             </div>
             <!-- 3D model end -->
-
         </section>
-        <!--first section end-->
+        <!--Hero Section end-->
+
+        <!-- Featured Projects Section -->
+        <section class="featured-projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Computer Vision Project</h3>
+                        <span class="project-badge">AI/ML</span>
+                    </div>
+                    <p>Advanced image processing and detection using deep learning models</p>
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>PyTorch</span>
+                        <span>OpenCV</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>GenAI Platform</h3>
+                        <span class="project-badge">LLM/RAG</span>
+                    </div>
+                    <p>End-to-end AI agent platform with multi-agent workflows and RAG pipelines</p>
+                    <div class="tech-tags">
+                        <span>LangChain</span>
+                        <span>FastAPI</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Web Development</h3>
+                        <span class="project-badge">Frontend</span>
+                    </div>
+                    <p>Modern responsive web applications with focus on user experience</p>
+                    <div class="tech-tags">
+                        <span>HTML/CSS</span>
+                        <span>JavaScript</span>
+                        <span>Web Dev</span>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all-link">
+                <a href="./highlights.html">View All Projects →</a>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">LeetCode Problems</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2+</div>
+                <div class="stat-label">Internships</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Tech Skills</div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Preview -->
+        <section class="tech-stack-preview">
+            <h2>Tech Stack</h2>
+            <div class="tech-stack-grid">
+                <div class="tech-item">
+                    <img src="./assets/icons/tech/python.svg" alt="Python" class="tech-icon">
+                    <span>Python</span>
+                </div>
+                <div class="tech-item">
+                    <img src="./assets/icons/tech/pytorch.svg" alt="PyTorch" class="tech-icon">
+                    <span>PyTorch</span>
+                </div>
+                <div class="tech-item">
+                    <img src="./assets/icons/tech/opencv.svg" alt="OpenCV" class="tech-icon">
+                    <span>OpenCV</span>
+                </div>
+                <div class="tech-item">
+                    <img src="./assets/icons/tech/langchain.svg" alt="LangChain" class="tech-icon">
+                    <span>LangChain</span>
+                </div>
+                <div class="tech-item">
+                    <img src="./assets/icons/tech/cpp.svg" alt="C++" class="tech-icon">
+                    <span>C++</span>
+                </div>
+                <div class="tech-item">
+                    <img src="./assets/icons/tech/docker.svg" alt="Docker" class="tech-icon">
+                    <span>Docker</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Work Together?</h2>
+            <p>Let's collaborate on innovative AI solutions and impactful projects</p>
+            <a href="./contact.html" class="btn btn-cta">Get In Touch</a>
+        </section>
 
     </main>
 

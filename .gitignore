@@ -1,4 +1,7 @@
+.vscode/
 # all files in temp folders
 temp/
 # all temp files
 temp.*
+
+.claude/
