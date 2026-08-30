@@ -38,6 +38,7 @@
             </div>
             <p>I'm a Computer Science Engineer currently pursuing an M.Tech in Data Science and Artificial Intelligence at IIT Madras. I enjoy building intelligent systems that solve real-world problems, with a primary interest in Computer Vision, Deep Learning, and Artificial Intelligence.</p>
             <p>My journey into AI started with image processing and machine learning projects, and gradually evolved into developing deep learning models for vision applications. I enjoy understanding not only how a model works but also <em>why</em> it works — by exploring the underlying mathematics, optimization techniques, and implementation details.</p>
+            <button id="preview-cv-btn" class="cv-preview-btn">📄 Preview My Resume</button>
             </div>
         </section>
 
@@ -321,6 +322,20 @@
         </section>
 
     </main>
+
+    <!-- CV Preview Modal -->
+    <div id="cv-modal" class="cv-modal">
+        <div class="cv-modal-overlay"></div>
+        <div class="cv-modal-content">
+            <div class="cv-modal-header">
+                <h2>Resume Preview</h2>
+                <button class="cv-modal-close" id="close-cv-modal">&times;</button>
+            </div>
+            <div class="cv-modal-body">
+                <img id="cv-image" src="./assets/certificates/Resume.jpg" alt="Resume Preview" />
+            </div>
+        </div>
+    </div>
 
     <script src="./js/script.js"></script>
 

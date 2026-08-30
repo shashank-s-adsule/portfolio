@@ -15,3 +15,32 @@ function copyEmail() {
     });
 }
 
+// ################################################ CV Preview Modal ##########################################
+document.addEventListener('DOMContentLoaded', function() {
+    const previewBtn = document.getElementById('preview-cv-btn');
+    const modal = document.getElementById('cv-modal');
+    const closeBtn = document.getElementById('close-cv-modal');
+    const overlay = document.querySelector('.cv-modal-overlay');
+
+    if (previewBtn) {
+        previewBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', function() {
+            modal.classList.remove('active');
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+    }
+});
+
